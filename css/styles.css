@@ -48,7 +48,7 @@ h1 {
   width: 80%;
   max-width: 800px;
   overflow-x: auto;
-  margin-bottom: 50px; /* Увеличиваем пространство снизу */
+  margin-bottom: 50px;
 }
 
 .data-table {
@@ -76,7 +76,7 @@ h1 {
 }
 
 input[type="number"] {
-  width: 100px; /* Уменьшаем ширину поля до 100px */
+  width: 100px;
   padding: 5px;
   background-color: #555;
   color: white;
@@ -91,11 +91,12 @@ input[type="number"]:focus {
 
 /* Разделитель для вкладок */
 .tab-separator {
-  text-align: center;
+  text-align: left;
   background-color: #555;
   color: white;
   padding: 10px;
   font-weight: bold;
+  border-bottom: 1px solid #666;
 }
 
 /* Уменьшение размера столбца "Цена" */
@@ -106,4 +107,10 @@ input[type="number"]:focus {
 /* Стиль для нового столбца "Сумма" */
 td input[type="number"] {
   width: 40px;
+}
+
+/* Отключаем возможность ввода в поле "Сумма" */
+td input[readonly] {
+  background-color: #444;
+  cursor: not-allowed;
 }
