@@ -101,24 +101,24 @@ input[type="number"]:focus {
   border-color: #999; /* Изменение границы при фокусе */
 }
 
-/* Для кнопок выбора языка */
+/* Для выпадающего списка выбора языка */
 .language-switcher {
   display: flex;
   justify-content: center;
   margin-top: 10px;
 }
 
-.language-switcher button {
+#language-select {
   background-color: #444;
   color: white;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 0 10px;
+  border-radius: 5px;
 }
 
-.language-switcher button:hover {
+#language-select:hover {
   background-color: #555;
 }
 
