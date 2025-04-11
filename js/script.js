@@ -68,9 +68,18 @@ function updateValues(prefix, value) {
     let slotId = 'slot' + i;
     let element = document.getElementById(slotId);
     if (element) {
-      element.innerText = `${prefix} ${value + i * 10}`;
+      element.value = `${prefix} ${value + i * 10}`;
     }
   }
+}
+
+// Функция для обновления значения на основе ввода пользователя
+function updateValue(slotId) {
+  let valueElement = document.getElementById(slotId);
+  let value = valueElement.value;
+  // Преобразуем в число и обновляем
+  value = parseInt(value) || 0;
+  valueElement.value = value;  // Обновляем поле с числом
 }
 
 // Инициализация вкладки по умолчанию
