@@ -1,41 +1,18 @@
-function switchTab(tabId) {
-  // Скрыть все вкладки
-  const tabs = document.querySelectorAll('.tab-content');
-  tabs.forEach(tab => tab.style.display = 'none');
-
-  // Показать выбранную вкладку
-  const selectedTab = document.getElementById(tabId);
-  if (selectedTab) {
-    selectedTab.style.display = 'block';
-  }
-}
-
-function updateValue(slotId) {
-  const slotValue = document.getElementById(slotId).value;
-  console.log('Value for ' + slotId + ': ' + slotValue);
-}
-
 function switchLanguage() {
-  const selectedLang = document.getElementById('language-select').value;
-  const pageDescription = document.getElementById('page-description');
-  const tabButtons = document.querySelectorAll('.tab-button');
-  const donateButtons = document.querySelectorAll('.donate-button');
+  const lang = document.getElementById('language-select').value;
+  document.documentElement.lang = lang;
 
-  if (selectedLang === 'ru') {
-    pageDescription.textContent = 'Этот сайт размещен на GitHub Pages.';
-    tabButtons.forEach(button => {
-      button.textContent = button.textContent === "All" ? "Все" : button.textContent;
-    });
-    donateButtons.forEach(button => {
-      button.textContent = 'Пожертвовать';
-    });
-  } else if (selectedLang === 'en') {
-    pageDescription.textContent = 'This site is hosted with GitHub Pages.';
-    tabButtons.forEach(button => {
-      button.textContent = button.textContent === "Все" ? "All" : button.textContent;
-    });
-    donateButtons.forEach(button => {
-      button.textContent = 'Donate';
-    });
+  const title = document.getElementById('site-title');
+  const description = document.getElementById('site-description');
+  const inputs = document.querySelectorAll('input[type="number"]');
+
+  if (lang === 'en') {
+    title.textContent = 'S69F Interactive';
+    description.textContent = 'This site is hosted on GitHub Pages.';
+    inputs.forEach(input => input.placeholder = 'Enter amount');
+  } else {
+    title.textContent = 'S69F Интерактив';
+    description.textContent = 'Этот сайт размещен на GitHub Pages.';
+    inputs.forEach(input => input.placeholder = 'Введите кол-во');
   }
 }
