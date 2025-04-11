@@ -77,8 +77,9 @@ function updateValues(prefix, value) {
 function updateValue(slotId) {
   let valueElement = document.getElementById(slotId);
   let value = valueElement.value;
-  // Преобразуем в число и обновляем
+  // Преобразуем в число и обновляем, если число отрицательное, то устанавливаем 0
   value = parseInt(value) || 0;
+  if (value < 0) value = 0;
   valueElement.value = value;  // Обновляем поле с числом
 }
 
