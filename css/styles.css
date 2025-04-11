@@ -89,6 +89,7 @@ input[type="number"]:focus {
   border-color: #f39c12;
 }
 
+/* Разделитель для вкладок */
 .tab-separator {
   text-align: left;
   background-color: #555;
@@ -98,17 +99,24 @@ input[type="number"]:focus {
   border-bottom: 1px solid #666;
 }
 
+/* Уменьшение размера столбца "Цена" */
 .price-column {
-  min-width: 100px;
-  white-space: nowrap;
+  width: 20px;
 }
 
+/* Стиль для нового столбца "Сумма" */
 td input[type="number"] {
   width: 40px;
   text-align: right;
 }
 
+/* Отключаем возможность ввода в поле "Сумма" */
 td input[readonly] {
   background-color: #444;
   cursor: not-allowed;
+}
+
+/* Уменьшение размера столбца "Количество" */
+td input[type="number"]:not([readonly]) {
+  width: 20px;
 }
