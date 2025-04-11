@@ -58,12 +58,16 @@ const tabs = {
   },
 };
 
+function copyCode(code) {
+  navigator.clipboard.writeText(code);
+  alert(`Код "${code}" скопирован в буфер обмена!`);
+}
+
 function calculateSum(input) {
   const row = input.closest("tr");
-  const priceText = row.querySelector(".price-column").textContent;
-  const price = parseInt(priceText.replace(/\D/g, ""));
+  const price = parseInt(row.querySelector(".price-column").textContent.replace(/\D/g, ""));
   const quantity = parseInt(input.value) || 0;
-  const sumElement = row.querySelector(".sum-container span:first-child");
+  const sumElement = row.querySelector(".sum-container span");
   sumElement.textContent = (price * quantity).toLocaleString() + " ₽";
 }
 
@@ -87,8 +91,12 @@ function switchTab(tab) {
         tabs[key].items.forEach((item) => {
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td>${item.name} <span class="item-code">[${item.code}]</span></td>
-            <td class="price-column">Цена: ${item.price} ₽</td>
+            <td>
+              ${item.name}
+              <span class="item-code">[${item.code}]</span>
+              <button class="copy-btn" onclick="copyCode('${item.code}')">Копировать</button>
+            </td>
+            <td class="price-column">${item.price} ₽</td>
             <td><input type="number" placeholder="0" min="0"></td>
             <td>
               <div class="sum-container">
@@ -118,8 +126,12 @@ function switchTab(tab) {
     tabs[tab].items.forEach((item) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${item.name} <span class="item-code">[${item.code}]</span></td>
-        <td class="price-column">Цена: ${item.price} ₽</td>
+        <td>
+          ${item.name}
+          <span class="item-code">[${item.code}]</span>
+          <button class="copy-btn" onclick="copyCode('${item.code}')">Копировать</button>
+        </td>
+        <td class="price-column">${item.price} ₽</td>
         <td><input type="number" placeholder="0" min="0"></td>
         <td>
           <div class="sum-container">
@@ -136,5 +148,5 @@ function switchTab(tab) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  switchTab("tab1");
+  switchTab("tab2"); // Начальная вкладка "Люди"
 });
