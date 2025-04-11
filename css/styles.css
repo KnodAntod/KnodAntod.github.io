@@ -71,6 +71,7 @@ h1 {
 
 .data-table th {
   background-color: #555;
+  cursor: default;
 }
 
 .data-table tr:nth-child(even) {
@@ -176,22 +177,6 @@ td:first-child:hover .copy-btn {
   border: none;
 }
 
-.price-header {
-  cursor: pointer;
-  position: relative;
-}
-
-.price-header::after {
-  content: "↑";
-  color: orange;
-  margin-left: 8px;
-  font-size: 0.8em;
-}
-
-.price-header[data-order="desc"]::after {
-  content: "↓";
-}
-
 /* Кнопки оплаты */
 .payment-btn {
   width: 30px;
@@ -216,4 +201,5 @@ td:first-child:hover .copy-btn {
   width: 20px;
   height: 20px;
   object-fit: contain;
+  background: transparent !important;
 }
