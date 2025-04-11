@@ -3,33 +3,33 @@ const tabs = {
   tab2: {
     title: "Люди",
     items: [
-      { name: "Зомбированный", code: "ZMB", price: 100 },
-      { name: "Сталкер", code: "STL", price: 200 },
-      { name: "Бандит", code: "BND", price: 150 },
-      { name: "Ренегат", code: "RNG", price: 300 },
-      { name: "Чистое небо", code: "CHN", price: 250 },
-      { name: "Долг", code: "DLG", price: 180 },
-      { name: "Свобода", code: "SVB", price: 220 },
-      { name: "Военный", code: "VNY", price: 400 },
-      { name: "Наемник", code: "NEM", price: 350 },
-      { name: "Монолит", code: "MNT", price: 500 },
-      { name: "Грех", code: "GRH", price: 450 },
-      { name: "ИИГ", code: "IIG", price: 600 },
+      { name: "Зомбированный", code: "ZMB", price: 23 },
+      { name: "Сталкер", code: "STL", price: 29 },
+      { name: "Бандит", code: "BND", price: 29 },
+      { name: "Ренегат", code: "RNG", price: 30 },
+      { name: "Чистое небо", code: "CHN", price: 33 },
+      { name: "Долг", code: "DLG", price: 40 },
+      { name: "Свобода", code: "SVB", price: 40 },
+      { name: "Военный", code: "VNY", price: 45 },
+      { name: "Наемник", code: "NEM", price: 54 },
+      { name: "Монолит", code: "MNT", price: 65 },
+      { name: "Грех", code: "GRH", price: 70 },
+      { name: "ИИГ", code: "IIG", price: 77 },
     ],
   },
   tab3: {
     title: "Мутанты",
     items: [
-      { name: "Собака", code: "DOG", price: 100 },
-      { name: "Псевдособака", code: "PDG", price: 200 },
-      { name: "Полтергейст", code: "PLT", price: 300 },
-      { name: "Бюрер", code: "BRR", price: 400 },
-      { name: "Пси-собака", code: "PSD", price: 500 },
-      { name: "Кровосос", code: "KRS", price: 600 },
-      { name: "Химера", code: "HMR", price: 700 },
-      { name: "Контролер", code: "KTR", price: 800 },
-      { name: "Псевдогигант", code: "PGT", price: 900 },
-      { name: "Библиотекарь", code: "BLB", price: 1000 },
+      { name: "Собака", code: "DOG", price: 15 },
+      { name: "Псевдособака", code: "PDG", price: 47 },
+      { name: "Полтергейст", code: "PLT", price: 200 },
+      { name: "Бюрер", code: "BRR", price: 101 },
+      { name: "Пси-собака", code: "PSD", price: 121 },
+      { name: "Кровосос", code: "KRS", price: 125 },
+      { name: "Химера", code: "HMR", price: 199 },
+      { name: "Контролер", code: "KTR", price: 666 },
+      { name: "Псевдогигант", code: "PGT", price: 404 },
+      { name: "Библиотекарь", code: "BLB", price: 500 },
     ],
   },
   tab4: {
@@ -58,19 +58,7 @@ const tabs = {
   },
 };
 
-let currentSortOrder = 'asc';
 let isCopyLocked = false;
-
-function sortItemsByPrice(items, order) {
-  return [...items].sort((a, b) => 
-    order === 'asc' ? a.price - b.price : b.price - a.price
-  );
-}
-
-function updatePriceHeader() {
-  const header = document.querySelector('.price-header');
-  header.setAttribute('data-order', currentSortOrder);
-}
 
 async function copyCode(code, btn) {
   if (isCopyLocked) return;
@@ -129,10 +117,14 @@ function createTableRow(item) {
       </div>
     </td>
     <td>
-      <a href="https://www.donationalerts.com/r/sanchez69fullyoutube" target="_blank" class="payment-btn">
+      <a href="https://www.donationalerts.com/r/sanchez69fullyoutube" 
+         target="_blank" 
+         class="payment-btn">
         <img src="assets/img/DA.ico" alt="DonationAlerts">
       </a>
-      <a href="https://new.donatepay.ru/@Sanchez69full" target="_blank" class="payment-btn">
+      <a href="https://new.donatepay.ru/@Sanchez69full" 
+         target="_blank" 
+         class="payment-btn">
         <img src="assets/img/DP.ico" alt="DonatePay">
       </a>
     </td>
@@ -184,25 +176,6 @@ function renderTable(items, isAllTab = false) {
   }
 }
 
-function handlePriceSort() {
-  currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
-  updatePriceHeader();
-  
-  const activeTab = document.querySelector('.tab-button.active').dataset.tab;
-  
-  if (activeTab === 'tab1') {
-    const allItems = [];
-    Object.values(tabs).forEach(tab => {
-      if (tab.items) allItems.push(...tab.items);
-    });
-    const sorted = sortItemsByPrice(allItems, currentSortOrder);
-    renderTable(sorted, true);
-  } else {
-    const sorted = sortItemsByPrice(tabs[activeTab].items, currentSortOrder);
-    renderTable(sorted);
-  }
-}
-
 function switchTab(tab) {
   const tabButtons = document.querySelectorAll(".tab-button");
   tabButtons.forEach((button) => button.classList.remove("active"));
@@ -214,14 +187,12 @@ function switchTab(tab) {
     Object.values(tabs).forEach(tab => {
       if (tab.items) allItems.push(...tab.items);
     });
-    renderTable(sortItemsByPrice(allItems, currentSortOrder), true);
+    renderTable(allItems, true);
   } else {
-    renderTable(sortItemsByPrice(tabs[tab].items, currentSortOrder));
+    renderTable(tabs[tab].items);
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector('.price-header').addEventListener('click', handlePriceSort);
-  updatePriceHeader();
   switchTab("tab2");
 });
