@@ -78,3 +78,8 @@ input[type="number"] {
   border-radius: 5px;
   text-align: center;
 }
+
+input[type="number"]::placeholder {
+  color: #888; /* Серый цвет для подсказки */
+  font-style: italic;
+}
