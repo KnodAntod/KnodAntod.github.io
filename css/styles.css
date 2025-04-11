@@ -8,8 +8,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100vh;
+  min-height: 100%;
 }
 
 h1 {
@@ -43,6 +44,7 @@ h1 {
   width: 80%;
   max-width: 800px;
   overflow-x: auto;
+  margin-bottom: 50px; /* Увеличиваем пространство снизу */
 }
 
 .data-table {
@@ -70,13 +72,21 @@ h1 {
 }
 
 input[type="number"] {
-  width: 100px;
+  width: 120px; /* Увеличиваем ширину поля для ввода */
   padding: 5px;
   background-color: #555;
   color: white;
   border: 1px solid #666;
   border-radius: 5px;
   text-align: center;
+  -moz-appearance: textfield; /* Убираем стрелки в Firefox */
+  -webkit-appearance: none; /* Убираем стрелки в Chrome */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type="number"]::placeholder {
