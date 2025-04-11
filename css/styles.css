@@ -100,3 +100,48 @@ input[type="number"]:focus {
   outline: none;
   border-color: #999; /* Изменение границы при фокусе */
 }
+
+/* Для кнопок выбора языка */
+.language-switcher {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.language-switcher button {
+  background-color: #444;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0 10px;
+}
+
+.language-switcher button:hover {
+  background-color: #555;
+}
+
+/* Стили для кнопок донатов */
+.donate-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.donate-button {
+  background-color: #0066cc;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 15px; /* Круглые края */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px; /* Ширина кнопки */
+}
+
+.donate-button:hover {
+  background-color: #0055a3;
+}
