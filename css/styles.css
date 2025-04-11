@@ -84,12 +84,13 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
-  width: 100px;
+  width: 60px;
   padding: 5px;
   background-color: #555;
   color: white;
   border: 1px solid #777;
   border-radius: 5px;
+  text-align: center;
 }
 
 input[type="number"]:focus {
@@ -97,36 +98,46 @@ input[type="number"]:focus {
   border-color: #f39c12;
 }
 
+/* Центрирование названий вкладок и цвет */
 .tab-separator {
-  text-align: left;
+  text-align: center;
   background-color: #555;
-  color: white;
+  color: orange;
   padding: 10px;
   font-weight: bold;
   border-bottom: 1px solid #666;
 }
 
+/* Стиль для столбца "Количество" */
+td:nth-child(3) {
+  width: 80px;
+  text-align: center;
+}
+
+/* Стиль для блока суммы */
+.sum-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: #555;
+  border: 1px solid #666;
+  border-radius: 5px;
+  padding: 5px;
+  min-width: 100px;
+}
+
+.sum-container span {
+  font-weight: bold;
+}
+
+/* Стиль для столбца "Оплата" */
+td:nth-child(5) {
+  text-align: center;
+  width: 100px;
+}
+
 .price-column {
   min-width: 100px;
   white-space: nowrap;
-}
-
-/* Стиль для контейнера суммы */
-.sum-container {
-  position: relative;
-  display: inline-block;
-}
-
-.currency {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #999;
-}
-
-td input[readonly] {
-  background-color: #444;
-  cursor: not-allowed;
 }
