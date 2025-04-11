@@ -72,7 +72,7 @@ h1 {
 }
 
 input[type="number"] {
-  width: 120px; /* Увеличиваем ширину поля для ввода */
+  width: 100px; /* Уменьшаем ширину поля до 100px, чтобы помещалось максимум 6 цифр */
   padding: 5px;
   background-color: #555;
   color: white;
@@ -81,6 +81,8 @@ input[type="number"] {
   text-align: center;
   -moz-appearance: textfield; /* Убираем стрелки в Firefox */
   -webkit-appearance: none; /* Убираем стрелки в Chrome */
+  margin-left: auto;
+  margin-right: 20px; /* Добавляем небольшой отступ справа */
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -92,4 +94,9 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"]::placeholder {
   color: #888; /* Серый цвет для подсказки */
   font-style: italic;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #999; /* Изменение границы при фокусе */
 }
