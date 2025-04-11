@@ -1,5 +1,5 @@
 const tabs = {
-  tab1: [], // "Все"
+  tab1: [],
   tab2: {
     title: "Люди",
     items: [
@@ -71,26 +71,28 @@ function updatePriceHeader() {
   header.setAttribute('data-order', currentSortOrder);
 }
 
-function handlePriceSort() {
-  currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
-  updatePriceHeader();
-  switchTab(document.querySelector('.tab-button.active').dataset.tab);
-}
-
-function copyCode(code) {
-  navigator.clipboard.writeText(code);
+async function copyCode(code, btn) {
+  try {
+    await navigator.clipboard.writeText(code);
+    const originalText = btn.textContent;
+    btn.textContent = "Скопировано!";
+    
+    setTimeout(() => {
+      btn.textContent = originalText;
+    }, 1000);
+  } catch (err) {
+    console.error('Ошибка копирования:', err);
+  }
 }
 
 function calculateSum(input) {
   const row = input.closest("tr");
   const price = parseInt(row.querySelector(".price-column").textContent.replace(/\D/g, ""));
   
-  // Ограничение количества (0-1000)
   let quantity = parseInt(input.value) || 0;
   quantity = Math.max(Math.min(quantity, 1000), 0);
   input.value = quantity;
 
-  // Ограничение суммы (0-1,000,000)
   let sum = price * quantity;
   sum = Math.min(sum, 1000000);
   sum = Math.max(sum, 0);
@@ -99,17 +101,11 @@ function calculateSum(input) {
   sumElement.textContent = sum.toLocaleString() + " ₽";
 }
 
-function switchTab(tab) {
+function renderTable(items, isAllTab = false) {
   const tableBody = document.getElementById("table-body");
-  const tabButtons = document.querySelectorAll(".tab-button");
-
-  tabButtons.forEach((button) => button.classList.remove("active"));
-  const activeButton = document.querySelector(`.tab-button[data-tab="${tab}"]`);
-  activeButton.classList.add("active");
-
   tableBody.innerHTML = "";
 
-  if (tab === "tab1") {
+  if (isAllTab) {
     Object.keys(tabs).forEach((key) => {
       if (key !== "tab1") {
         const sectionTitle = document.createElement("tr");
@@ -123,7 +119,7 @@ function switchTab(tab) {
             <td>
               ${item.name}
               <span class="item-code">[${item.code}]</span>
-              <button class="copy-btn" onclick="copyCode('${item.code}')">Копировать</button>
+              <button class="copy-btn" onclick="copyCode('${item.code}', this)">Копировать</button>
             </td>
             <td class="price-column">${item.price} ₽</td>
             <td><input type="number" placeholder="0" min="0" max="1000"></td>
@@ -147,18 +143,18 @@ function switchTab(tab) {
       }
     });
   } else {
+    const activeTab = document.querySelector('.tab-button.active').dataset.tab;
     const separatorRow = document.createElement("tr");
-    separatorRow.innerHTML = `<td colspan="5" class="tab-separator">${tabs[tab].title}</td>`;
+    separatorRow.innerHTML = `<td colspan="5" class="tab-separator">${tabs[activeTab].title}</td>`;
     tableBody.appendChild(separatorRow);
 
-    const sortedItems = sortItemsByPrice(tabs[tab].items, currentSortOrder);
-    sortedItems.forEach((item) => {
+    items.forEach((item) => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>
           ${item.name}
           <span class="item-code">[${item.code}]</span>
-          <button class="copy-btn" onclick="copyCode('${item.code}')">Копировать</button>
+          <button class="copy-btn" onclick="copyCode('${item.code}', this)">Копировать</button>
         </td>
         <td class="price-column">${item.price} ₽</td>
         <td><input type="number" placeholder="0" min="0" max="1000"></td>
@@ -176,8 +172,41 @@ function switchTab(tab) {
   }
 }
 
+function handlePriceSort() {
+  currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+  updatePriceHeader();
+  
+  const activeTab = document.querySelector('.tab-button.active').dataset.tab;
+  if (activeTab === 'tab1') {
+    const allItems = Object.values(tabs)
+      .filter(tab => tab.items)
+      .flatMap(tab => tab.items);
+    const sortedItems = sortItemsByPrice(allItems, currentSortOrder);
+    renderTable(sortedItems, true);
+  } else {
+    const sortedItems = sortItemsByPrice(tabs[activeTab].items, currentSortOrder);
+    renderTable(sortedItems);
+  }
+}
+
+function switchTab(tab) {
+  const tabButtons = document.querySelectorAll(".tab-button");
+  tabButtons.forEach((button) => button.classList.remove("active"));
+  const activeButton = document.querySelector(`.tab-button[data-tab="${tab}"]`);
+  activeButton.classList.add("active");
+
+  if (tab === "tab1") {
+    const allItems = Object.values(tabs)
+      .filter(tab => tab.items)
+      .flatMap(tab => tab.items);
+    renderTable(sortItemsByPrice(allItems, currentSortOrder), true);
+  } else {
+    renderTable(sortItemsByPrice(tabs[tab].items, currentSortOrder));
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector('.price-header').addEventListener('click', handlePriceSort);
   updatePriceHeader();
-  switchTab("tab2"); // Начальная вкладка "Люди"
+  switchTab("tab2");
 });
