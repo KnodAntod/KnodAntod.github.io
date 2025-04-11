@@ -39,6 +39,10 @@ h1 {
   background-color: #555;
 }
 
+.tab-button.active {
+  background-color: #d35400;
+}
+
 .table-container {
   margin-top: 40px;
   width: 80%;
@@ -85,7 +89,21 @@ input[type="number"]:focus {
   border-color: #f39c12;
 }
 
-/* Добавляем подсветку для выбранной вкладки */
-.tab-button.active {
-  background-color: #d35400;
+/* Разделитель для вкладок */
+.tab-separator {
+  text-align: center;
+  background-color: #555;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Уменьшение размера столбца "Цена" */
+.price-column {
+  width: 20px;
+}
+
+/* Стиль для нового столбца "Сумма" */
+td input[type="number"] {
+  width: 40px;
 }
