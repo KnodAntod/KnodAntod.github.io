@@ -18,10 +18,24 @@ function updateValue(slotId) {
 function switchLanguage() {
   const selectedLang = document.getElementById('language-select').value;
   const pageDescription = document.getElementById('page-description');
-  
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const donateButtons = document.querySelectorAll('.donate-button');
+
   if (selectedLang === 'ru') {
     pageDescription.textContent = 'Этот сайт размещен на GitHub Pages.';
+    tabButtons.forEach(button => {
+      button.textContent = button.textContent === "All" ? "Все" : button.textContent;
+    });
+    donateButtons.forEach(button => {
+      button.textContent = 'Пожертвовать';
+    });
   } else if (selectedLang === 'en') {
     pageDescription.textContent = 'This site is hosted with GitHub Pages.';
+    tabButtons.forEach(button => {
+      button.textContent = button.textContent === "Все" ? "All" : button.textContent;
+    });
+    donateButtons.forEach(button => {
+      button.textContent = 'Donate';
+    });
   }
 }
