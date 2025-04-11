@@ -49,13 +49,11 @@ h1 {
   max-width: 800px;
   overflow-x: auto;
   margin-bottom: 50px;
+  scrollbar-width: none; /* Скрыть полосу прокрутки Firefox */
 }
 
-/* Скрытие полосы прокрутки */
 .table-container::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  background: transparent;
+  display: none; /* Скрыть полосу прокрутки Chrome/Safari */
 }
 
 .data-table {
@@ -74,7 +72,6 @@ h1 {
   background-color: #555;
 }
 
-/* Обновленные стили "зебры" */
 .data-table tr:nth-child(even) {
   background-color: #3d3d3d;
 }
@@ -83,7 +80,6 @@ h1 {
   background-color: #4a4a4a;
 }
 
-/* Скрыть стрелочки у полей number */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -106,7 +102,6 @@ input[type="number"]:focus {
   border-color: #f39c12;
 }
 
-/* Центрирование названий вкладок */
 .tab-separator {
   text-align: center;
   background-color: #555;
@@ -116,13 +111,11 @@ input[type="number"]:focus {
   border-bottom: 1px solid #666;
 }
 
-/* Стиль для столбца "Количество" */
 td:nth-child(3) {
   width: 80px;
   text-align: center;
 }
 
-/* Стиль для блока суммы */
 .sum-container {
   display: flex;
   align-items: center;
@@ -139,7 +132,6 @@ td:nth-child(3) {
   font-weight: bold;
 }
 
-/* Стиль для столбца "Оплата" */
 td:nth-child(5) {
   text-align: center;
   width: 100px;
@@ -151,7 +143,6 @@ td:nth-child(5) {
   text-align: center !important;
 }
 
-/* Стиль для кода элемента */
 .item-code {
   color: orange;
   font-size: 0.95em;
@@ -159,7 +150,6 @@ td:nth-child(5) {
   font-weight: 500;
 }
 
-/* Кнопка копирования */
 .copy-btn {
   background: none;
   border: 1px solid orange;
@@ -178,7 +168,6 @@ td:first-child:hover .copy-btn {
   background: rgba(255, 165, 0, 0.2);
 }
 
-/* Разделитель между вкладками в "Все" */
 .section-divider {
   height: 2px;
   background-color: #444;
@@ -186,7 +175,6 @@ td:first-child:hover .copy-btn {
   border: none;
 }
 
-/* Стиль для заголовка цены */
 .price-header {
   cursor: pointer;
   position: relative;
