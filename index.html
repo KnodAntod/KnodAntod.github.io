@@ -10,10 +10,12 @@
 </head>
 <body>
 
-  <!-- Выбор языка -->
+  <!-- Выпадающий список для смены языка -->
   <div class="language-switcher">
-    <button onclick="switchLanguage('ru')">RU</button>
-    <button onclick="switchLanguage('en')">EN</button>
+    <select id="language-select" onchange="switchLanguage()">
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+    </select>
   </div>
 
   <h1>Sanchez69full - Interactive</h1>
