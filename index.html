@@ -4,58 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>S69F Интерактив</title>
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
   <!-- Язык -->
   <div class="language-selector">
-    <select id="languageSelect" onchange="changeLanguage()">
-      <option value="ru" selected>Русский</option>
-      <option value="en">English</option>
+    <select id="language-select" onchange="changeLanguage()">
+      <option value="ru" selected>RU</option>
+      <option value="en">EN</option>
     </select>
   </div>
 
-  <h1 id="mainTitle">S69F Интерактив</h1>
-  <p id="subtitle">Этот сайт размещён на GitHub Pages.</p>
+  <!-- Заголовок -->
+  <h1 id="site-title">S69F Интерактив</h1>
+  <p id="site-subtitle">Этот сайт размещён через GitHub Pages.</p>
 
   <!-- Вкладки -->
   <div class="tabs">
     <button class="tab-button" onclick="switchTab('all')">Все</button>
-    <button class="tab-button" onclick="switchTab('humans')">Люди</button>
+    <button class="tab-button" onclick="switchTab('people')">Люди</button>
     <button class="tab-button" onclick="switchTab('mutants')">Мутанты</button>
     <button class="tab-button" onclick="switchTab('good')">Хорошие события</button>
     <button class="tab-button" onclick="switchTab('neutral')">Нейтральные события</button>
     <button class="tab-button" onclick="switchTab('bad')">Плохие события</button>
   </div>
 
-  <!-- Таблица -->
-  <div class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th id="nameHeader">Имя/Название</th>
-          <th id="amountHeader">Сумма</th>
-        </tr>
-      </thead>
-      <tbody id="table-body">
-        <!-- JavaScript добавит строки -->
-      </tbody>
-    </table>
+  <!-- Таблицы -->
+  <div id="tables-container"></div>
 
-    <!-- Кнопки оплаты -->
-    <div class="payment-buttons">
-      <button class="payment-button" onclick="window.open('https://www.donationalerts.com/r/sanchez69fullyoutube', '_blank')">
-        <div class="icon-placeholder"></div>
-      </button>
-      <button class="payment-button" onclick="window.open('https://new.donatepay.ru/@Sanchez69full', '_blank')">
-        <div class="icon-placeholder"></div>
-      </button>
-    </div>
-  </div>
-
+  <!-- Скрипт -->
   <script src="js/script.js"></script>
 </body>
 </html>
