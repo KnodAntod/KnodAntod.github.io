@@ -1,27 +1,24 @@
 <!DOCTYPE html>
-<html lang="ru"> <!-- Установлен язык сайта на русский по умолчанию -->
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Моя страница на GitHub</title>
+  <title>S69F Интерактив</title>
 
-  <!-- Подключение стилей -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <h1>Sanchez69full - Interactive</h1>
-  <p>Этот сайт размещен на GitHub Pages.</p>
+  <h1 id="site-title">S69F Интерактив</h1>
+  <p id="site-description">Этот сайт размещен на GitHub Pages.</p>
 
-  <!-- Выпадающий список выбора языка -->
   <div class="language-switcher">
     <select id="language-select" onchange="switchLanguage()">
-      <option value="ru">Русский</option>
+      <option value="ru" selected>Русский</option>
       <option value="en">English</option>
     </select>
   </div>
 
-  <!-- Вкладки -->
   <div class="tabs">
     <button class="tab-button" onclick="switchTab('tab1')">Все</button>
     <button class="tab-button" onclick="switchTab('tab2')">Люди</button>
@@ -31,38 +28,35 @@
     <button class="tab-button" onclick="switchTab('tab6')">Плохие события</button>
   </div>
 
-  <!-- Таблица -->
   <div class="table-container">
     <table class="data-table">
       <thead>
         <tr>
           <th>Имя/Название</th>
-          <th>Сумма</th> <!-- Изменено "Value" на "Сумма" -->
+          <th>Сумма</th>
         </tr>
       </thead>
       <tbody id="table-body">
-        <!-- Строки с динамическими значениями -->
-        <tr><td>Slot 1</td><td><input type="number" id="slot1" placeholder="Введите сумму" onchange="updateValue('slot1')" min="0"></td></tr>
-        <tr><td>Slot 2</td><td><input type="number" id="slot2" placeholder="Введите сумму" onchange="updateValue('slot2')" min="0"></td></tr>
-        <tr><td>Slot 3</td><td><input type="number" id="slot3" placeholder="Введите сумму" onchange="updateValue('slot3')" min="0"></td></tr>
-        <tr><td>Slot 4</td><td><input type="number" id="slot4" placeholder="Введите сумму" onchange="updateValue('slot4')" min="0"></td></tr>
-        <tr><td>Slot 5</td><td><input type="number" id="slot5" placeholder="Введите сумму" onchange="updateValue('slot5')" min="0"></td></tr>
-        <tr><td>Slot 6</td><td><input type="number" id="slot6" placeholder="Введите сумму" onchange="updateValue('slot6')" min="0"></td></tr>
-        <tr><td>Slot 7</td><td><input type="number" id="slot7" placeholder="Введите сумму" onchange="updateValue('slot7')" min="0"></td></tr>
-        <tr><td>Slot 8</td><td><input type="number" id="slot8" placeholder="Введите сумму" onchange="updateValue('slot8')" min="0"></td></tr>
-        <tr><td>Slot 9</td><td><input type="number" id="slot9" placeholder="Введите сумму" onchange="updateValue('slot9')" min="0"></td></tr>
-        <tr><td>Slot 10</td><td><input type="number" id="slot10" placeholder="Введите сумму" onchange="updateValue('slot10')" min="0"></td></tr>
+        <!-- Строки -->
+        <tr><td>Slot 1</td><td><input type="number" id="slot1" placeholder="Введите кол-во" onchange="updateValue('slot1')" min="0"></td></tr>
+        <tr><td>Slot 2</td><td><input type="number" id="slot2" placeholder="Введите кол-во" onchange="updateValue('slot2')" min="0"></td></tr>
+        <tr><td>Slot 3</td><td><input type="number" id="slot3" placeholder="Введите кол-во" onchange="updateValue('slot3')" min="0"></td></tr>
+        <tr><td>Slot 4</td><td><input type="number" id="slot4" placeholder="Введите кол-во" onchange="updateValue('slot4')" min="0"></td></tr>
+        <tr><td>Slot 5</td><td><input type="number" id="slot5" placeholder="Введите кол-во" onchange="updateValue('slot5')" min="0"></td></tr>
+        <tr><td>Slot 6</td><td><input type="number" id="slot6" placeholder="Введите кол-во" onchange="updateValue('slot6')" min="0"></td></tr>
+        <tr><td>Slot 7</td><td><input type="number" id="slot7" placeholder="Введите кол-во" onchange="updateValue('slot7')" min="0"></td></tr>
+        <tr><td>Slot 8</td><td><input type="number" id="slot8" placeholder="Введите кол-во" onchange="updateValue('slot8')" min="0"></td></tr>
+        <tr><td>Slot 9</td><td><input type="number" id="slot9" placeholder="Введите кол-во" onchange="updateValue('slot9')" min="0"></td></tr>
+        <tr><td>Slot 10</td><td><input type="number" id="slot10" placeholder="Введите кол-во" onchange="updateValue('slot10')" min="0"></td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Кнопки оплаты -->
   <div class="donate-buttons">
     <button class="donate-button" onclick="window.location.href='https://www.donationalerts.com/r/sanchez69fullyoutube'"></button>
     <button class="donate-button" onclick="window.location.href='https://new.donatepay.ru/@Sanchez69full'"></button>
   </div>
 
-  <!-- Подключение скрипта -->
   <script src="js/script.js"></script>
 </body>
 </html>
