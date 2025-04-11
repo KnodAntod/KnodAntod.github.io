@@ -1,0 +1,13 @@
+/* Стили для фона и текста */
+body {
+  background-color: #333333; /* Темно-серый, почти черный */
+  color: white; /* Белый текст для контраста */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: orange; /* Оранжевый цвет текста */
+  text-align: center; /* Центрирование текста */
+  margin-top: 20px; /* Отступ сверху */
+}
