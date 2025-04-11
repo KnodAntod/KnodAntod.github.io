@@ -67,12 +67,13 @@ h1 {
   background-color: #555;
 }
 
+/* Обновленные стили "зебры" */
 .data-table tr:nth-child(even) {
-  background-color: #666;
+  background-color: #3d3d3d;
 }
 
 .data-table tr:nth-child(odd) {
-  background-color: #555;
+  background-color: #4a4a4a;
 }
 
 /* Скрыть стрелочки у полей number */
@@ -98,7 +99,7 @@ input[type="number"]:focus {
   border-color: #f39c12;
 }
 
-/* Центрирование названий вкладок и цвет */
+/* Центрирование названий вкладок */
 .tab-separator {
   text-align: center;
   background-color: #555;
@@ -124,7 +125,7 @@ td:nth-child(3) {
   border: 1px solid #666;
   border-radius: 5px;
   padding: 5px;
-  min-width: 100px;
+  min-width: 80px;
 }
 
 .sum-container span {
@@ -144,15 +145,33 @@ td:nth-child(5) {
 
 /* Стиль для кода элемента */
 .item-code {
-  color: #999;
-  font-size: 0.9em;
+  color: orange;
+  font-size: 0.95em;
   margin-left: 8px;
+  font-weight: 500;
+}
+
+/* Кнопка копирования */
+.copy-btn {
+  background: none;
+  border: 1px solid orange;
+  color: orange;
+  margin-left: 8px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.8em;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 165, 0, 0.2);
 }
 
 /* Разделитель между вкладками в "Все" */
 .section-divider {
   height: 2px;
-  background-color: #666;
+  background-color: #000;
   margin: 15px 0;
   border: none;
 }
