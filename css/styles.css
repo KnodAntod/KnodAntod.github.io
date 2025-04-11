@@ -107,10 +107,16 @@ input[type="number"]:focus {
 /* Стиль для нового столбца "Сумма" */
 td input[type="number"] {
   width: 40px;
+  text-align: right;
 }
 
 /* Отключаем возможность ввода в поле "Сумма" */
 td input[readonly] {
   background-color: #444;
   cursor: not-allowed;
+}
+
+/* Уменьшение размера столбца "Количество" */
+td input[type="number"]:not([readonly]) {
+  width: 20px;
 }
