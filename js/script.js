@@ -1,102 +1,87 @@
-/* Основной стиль для страницы */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #333333;
-  color: white;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  height: 100vh;
-  min-height: 100%;
+// Функция для переключения вкладок
+function switchTab(tabName) {
+  // Скрыть все строки таблицы по умолчанию
+  let rows = document.querySelectorAll('.data-table tbody tr');
+  rows.forEach(row => {
+    row.style.display = 'none';
+  });
+
+  // Показать строки для выбранной вкладки
+  switch (tabName) {
+    case 'tab1': // Все
+      showAllSlots();
+      break;
+    case 'tab2': // Люди
+      updateTableForPeople();
+      break;
+    case 'tab3': // Мутанты
+      updateTableForMutants();
+      break;
+    case 'tab4': // Хорошие события
+      updateTableForGoodEvents();
+      break;
+    case 'tab5': // Нейтральные события
+      updateTableForNeutralEvents();
+      break;
+    case 'tab6': // Плохие события
+      updateTableForBadEvents();
+      break;
+  }
 }
 
-h1 {
-  color: orange;
-  text-align: center;
-  margin-top: 20px;
+// Показать все слоты
+function showAllSlots() {
+  let rows = document.querySelectorAll('.data-table tbody tr');
+  rows.forEach(row => {
+    row.style.display = '';
+  });
 }
 
-.tabs {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  gap: 10px;
+// Обновление таблицы для "Люди"
+function updateTableForPeople() {
+  updateValues("Люди", 1000);
 }
 
-.tab-button {
-  background-color: #444;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+// Обновление таблицы для "Мутанты"
+function updateTableForMutants() {
+  updateValues("Мутанты", 2000);
 }
 
-.tab-button:hover {
-  background-color: #555;
+// Обновление таблицы для "Хорошие события"
+function updateTableForGoodEvents() {
+  updateValues("Хорошие события", 3000);
 }
 
-.table-container {
-  margin-top: 40px;
-  width: 80%;
-  max-width: 800px;
-  overflow-x: auto;
-  margin-bottom: 50px; /* Увеличиваем пространство снизу */
+// Обновление таблицы для "Нейтральные события"
+function updateTableForNeutralEvents() {
+  updateValues("Нейтральные события", 4000);
 }
 
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #444;
-  color: white;
+// Обновление таблицы для "Плохие события"
+function updateTableForBadEvents() {
+  updateValues("Плохие события", 5000);
 }
 
-.data-table th, .data-table td {
-  padding: 10px;
-  border: 1px solid #666;
+// Обновление значений в таблице
+function updateValues(prefix, value) {
+  for (let i = 1; i <= 10; i++) {
+    let slotId = 'slot' + i;
+    let element = document.getElementById(slotId);
+    if (element) {
+      element.value = ""; // Убираем изначальные значения
+    }
+  }
 }
 
-.data-table th {
-  background-color: #555;
+// Функция для обновления значения на основе ввода пользователя
+function updateValue(slotId) {
+  let valueElement = document.getElementById(slotId);
+  let value = valueElement.value;
+  // Преобразуем в число и обновляем, если число отрицательное, то устанавливаем 0
+  value = parseInt(value) || 0;
+  if (value < 0) value = 0;
+  valueElement.value = value;  // Обновляем поле с числом
 }
 
-.data-table tr:nth-child(even) {
-  background-color: #666;
-}
-
-.data-table tr:nth-child(odd) {
-  background-color: #555;
-}
-
-input[type="number"] {
-  width: 100px; /* Уменьшаем ширину поля до 100px, чтобы помещалось максимум 6 цифр */
-  padding: 5px;
-  background-color: #555;
-  color: white;
-  border: 1px solid #666;
-  border-radius: 5px;
-  text-align: center;
-  -moz-appearance: textfield; /* Убираем стрелки в Firefox */
-  -webkit-appearance: none; /* Убираем стрелки в Chrome */
-  margin-left: auto;
-  margin-right: 20px; /* Добавляем небольшой отступ справа */
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"]::placeholder {
-  color: #888; /* Серый цвет для подсказки */
-  font-style: italic;
-}
-
-input[type="number"]:focus {
-  outline: none;
-  border-color: #999; /* Изменение границы при фокусе */
-}
+// Инициализация вкладки по умолчанию
+switchTab('tab1');
