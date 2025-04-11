@@ -130,7 +130,7 @@ function createTableRow(item) {
     </td>
     <td>
       <a href="https://www.donationalerts.com/r/sanchez69fullyoutube" target="_blank" class="payment-btn">
-        <img src="assets/img/DA.png" alt="DonationAlerts">
+        <img src="assets/img/DA.ico" alt="DonationAlerts">
       </a>
       <a href="https://new.donatepay.ru/@Sanchez69full" target="_blank" class="payment-btn">
         <img src="assets/img/DP.ico" alt="DonatePay">
