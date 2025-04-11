@@ -61,7 +61,22 @@ const tabs = {
 
 function switchTab(tab) {
   const tableBody = document.getElementById("table-body");
+  const tabButtons = document.querySelectorAll(".tab-button");
+
+  // Удаляем подсветку с всех вкладок
+  tabButtons.forEach(button => button.classList.remove("active"));
+
+  // Добавляем подсветку на текущую вкладку
+  const activeButton = document.querySelector(`.tab-button[data-tab="${tab}"]`);
+  activeButton.classList.add("active");
+
   tableBody.innerHTML = "";
+
+  // Добавляем текстовый разделитель для вкладки
+  const tabName = activeButton.textContent;
+  const separatorRow = document.createElement("tr");
+  separatorRow.innerHTML = `<td colspan="4" class="tab-separator">${tabName}</td>`;
+  tableBody.appendChild(separatorRow);
 
   const selectedTab = tabs[tab] || [];
   selectedTab.forEach(item => {
@@ -70,6 +85,7 @@ function switchTab(tab) {
       <td>${item.name}</td>
       <td class="price-column">${item.price}</td>
       <td><input type="number" placeholder="Введите кол-во" min="0"></td>
+      <td><input type="number" placeholder="Сумма" min="0" readonly></td>
     `;
     tableBody.appendChild(row);
   });
@@ -78,12 +94,17 @@ function switchTab(tab) {
   if (tab === "tab1") {
     Object.keys(tabs).forEach(key => {
       if (key !== "tab1") {
+        const sectionTitle = document.createElement("tr");
+        sectionTitle.innerHTML = `<td colspan="4" class="tab-separator">${key.replace("tab", "")}</td>`;
+        tableBody.appendChild(sectionTitle);
+
         tabs[key].forEach(item => {
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${item.name}</td>
             <td class="price-column">${item.price}</td>
             <td><input type="number" placeholder="Введите кол-во" min="0"></td>
+            <td><input type="number" placeholder="Сумма" min="0" readonly></td>
           `;
           tableBody.appendChild(row);
         });
@@ -92,5 +113,7 @@ function switchTab(tab) {
   }
 }
 
-// По умолчанию открыта вкладка "Люди"
-switchTab("tab2");
+// Инициализация вкладки по умолчанию
+document.addEventListener("DOMContentLoaded", () => {
+  switchTab("tab1");
+});
