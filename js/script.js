@@ -92,4 +92,25 @@ function changeTableContent(tabId) {
       <tr><td>Псевдособака</td><td><input type="number" id="mutant2" placeholder="Введите кол-во" onchange="updateValue('mutant2')" min="0"></td></tr>
       <tr><td>Полтергейст</td><td><input type="number" id="mutant3" placeholder="Введите кол-во" onchange="updateValue('mutant3')" min="0"></td></tr>
       <tr><td>Бюрер</td><td><input type="number" id="mutant4" placeholder="Введите кол-во" onchange="updateValue('mutant4')" min="0"></td></tr>
-      <tr><td>Пси-собака</td><td><input type="number" id="mutant5
+      <tr><td>Пси-собака</td><td><input type="number" id="mutant5" placeholder="Введите кол-во" onchange="updateValue('mutant5')" min="0"></td></tr>
+      <tr><td>Кровосос</td><td><input type="number" id="mutant6" placeholder="Введите кол-во" onchange="updateValue('mutant6')" min="0"></td></tr>
+      <tr><td>Химера</td><td><input type="number" id="mutant7" placeholder="Введите кол-во" onchange="updateValue('mutant7')" min="0"></td></tr>
+      <tr><td>Контролер</td><td><input type="number" id="mutant8" placeholder="Введите кол-во" onchange="updateValue('mutant8')" min="0"></td></tr>
+      <tr><td>Псевдогигант</td><td><input type="number" id="mutant9" placeholder="Введите кол-во" onchange="updateValue('mutant9')" min="0"></td></tr>
+      <tr><td>Библиотекарь</td><td><input type="number" id="mutant10" placeholder="Введите кол-во" onchange="updateValue('mutant10')" min="0"></td></tr>
+    `;
+  } else if (tabId === 'tab4') {
+    // Хорошие события
+    document.getElementById('table-body-good-events').innerHTML = `
+      <tr><td>[ВКД]</td><td><input type="number" id="event1" placeholder="Введите кол-во" onchange="updateValue('event1')" min="0"></td></tr>
+      <tr><td>[СТЙ]</td><td><input type="number" id="event2" placeholder="Введите кол-во" onchange="updateValue('event2')" min="0"></td></tr>
+      <tr><td>[ХИЛ]</td><td><input type="number" id="event3" placeholder="Введите кол-во" onchange="updateValue('event3')" min="0"></td></tr>
+    `;
+  }
+}
+
+// Инициализация таблицы по умолчанию
+window.onload = function() {
+  changeTableContent('tab1');
+  changeLanguage();
+}
