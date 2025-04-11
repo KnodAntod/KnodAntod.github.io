@@ -1,24 +1,68 @@
 // Функция для переключения вкладок
 function switchTab(tabName) {
-  // Скрыть все табы
-  let tabs = document.querySelectorAll('.data-table tbody');
-  tabs.forEach(tab => {
-    tab.style.display = 'none';
+  // Скрыть все строки таблицы по умолчанию
+  let rows = document.querySelectorAll('.data-table tbody tr');
+  rows.forEach(row => {
+    row.style.display = 'none';
   });
 
-  // Показать нужную вкладку
-  let selectedTab = document.getElementById(tabName);
-  if (selectedTab) {
-    selectedTab.style.display = 'table-row-group';
-  }
-
-  // Изменение значений в таблице (например, для вкладки UBNC)
-  if (tabName === 'tab1') {
-    updateValues('UBNC', 2500);
+  // Показать строки для выбранной вкладки
+  switch (tabName) {
+    case 'tab1': // Все
+      showAllSlots();
+      break;
+    case 'tab2': // Люди
+      updateTableForPeople();
+      break;
+    case 'tab3': // Мутанты
+      updateTableForMutants();
+      break;
+    case 'tab4': // Хорошие события
+      updateTableForGoodEvents();
+      break;
+    case 'tab5': // Нейтральные события
+      updateTableForNeutralEvents();
+      break;
+    case 'tab6': // Плохие события
+      updateTableForBadEvents();
+      break;
   }
 }
 
-// Функция для обновления значений в таблице
+// Показать все слоты
+function showAllSlots() {
+  let rows = document.querySelectorAll('.data-table tbody tr');
+  rows.forEach(row => {
+    row.style.display = '';
+  });
+}
+
+// Обновление таблицы для "Люди"
+function updateTableForPeople() {
+  updateValues("Люди", 1000);
+}
+
+// Обновление таблицы для "Мутанты"
+function updateTableForMutants() {
+  updateValues("Мутанты", 2000);
+}
+
+// Обновление таблицы для "Хорошие события"
+function updateTableForGoodEvents() {
+  updateValues("Хорошие события", 3000);
+}
+
+// Обновление таблицы для "Нейтральные события"
+function updateTableForNeutralEvents() {
+  updateValues("Нейтральные события", 4000);
+}
+
+// Обновление таблицы для "Плохие события"
+function updateTableForBadEvents() {
+  updateValues("Плохие события", 5000);
+}
+
+// Обновление значений в таблице
 function updateValues(prefix, value) {
   for (let i = 1; i <= 10; i++) {
     let slotId = 'slot' + i;
