@@ -3,47 +3,48 @@ const tabs = {
   tab2: {
     title: "Люди",
     items: [
-      { name: "Зомбированный", price: 100 },
-      { name: "Сталкер", price: 200 },
-      { name: "Бандит", price: 150 },
-      { name: "Ренегат", price: 300 },
-      { name: "ЧН", price: 250 },
-      { name: "Долг", price: 180 },
-      { name: "Свобода", price: 220 },
-      { name: "Военный", price: 400 },
-      { name: "Наемник", price: 350 },
-      { name: "Монолит", price: 500 },
-      { name: "Грех", price: 450 },
-      { name: "ИИГ", price: 600 },
+      { name: "Зомбированный", code: "ZMB", price: 100 },
+      { name: "Сталкер", code: "STL", price: 200 },
+      { name: "Бандит", code: "BND", price: 150 },
+      { name: "Ренегат", code: "RNG", price: 300 },
+      { name: "ЧН", code: "CHN", price: 250 },
+      { name: "Долг", code: "DLG", price: 180 },
+      { name: "Свобода", code: "SVB", price: 220 },
+      { name: "Военный", code: "VNY", price: 400 },
+      { name: "Наемник", code: "NEM", price: 350 },
+      { name: "Монолит", code: "MNT", price: 500 },
+      { name: "Грех", code: "GRH", price: 450 },
+      { name: "ИИГ", code: "IIG", price: 600 },
     ],
   },
   tab3: {
     title: "Мутанты",
     items: [
-      { name: "Собака", price: 100 },
-      { name: "Псевдособака", price: 200 },
-      { name: "Полтергейст", price: 300 },
-      { name: "Бюрер", price: 400 },
-      { name: "Пси-собака", price: 500 },
-      { name: "Кровосос", price: 600 },
-      { name: "Химера", price: 700 },
-      { name: "Контролер", price: 800 },
-      { name: "Псевдогигант", price: 900 },
-      { name: "Библиотекарь", price: 1000 },
+      { name: "Собака", code: "DOG", price: 100 },
+      { name: "Псевдособака", code: "PDG", price: 200 },
+      { name: "Полтергейст", code: "PLT", price: 300 },
+      { name: "Бюрер", code: "BRR", price: 400 },
+      { name: "Пси-собака", code: "PSD", price: 500 },
+      { name: "Кровосос", code: "KRS", price: 600 },
+      { name: "Химера", code: "HMR", price: 700 },
+      { name: "Контролер", code: "KTR", price: 800 },
+      { name: "Псевдогигант", code: "PGT", price: 900 },
+      { name: "Библиотекарь", code: "BLB", price: 1000 },
     ],
   },
   tab4: {
     title: "Хорошие события",
     items: [
-      { name: "[ВКД]", price: 50 },
-      { name: "[СТЙ]", price: 75 },
-      { name: "[ХИЛ]", price: 100 },
+      { name: "[ВКД]", code: "VKD", price: 50 },
+      { name: "[СТЙ]", code: "STY", price: 75 },
+      { name: "[ХИЛ]", code: "HIL", price: 100 },
     ],
   },
   tab5: {
     title: "Нейтральные события",
     items: Array.from({ length: 10 }, (_, i) => ({
       name: `Событие ${i + 1}`,
+      code: `NE${i + 1}`,
       price: (i + 1) * 50,
     })),
   },
@@ -51,6 +52,7 @@ const tabs = {
     title: "Плохие события",
     items: Array.from({ length: 10 }, (_, i) => ({
       name: `Событие ${i + 1}`,
+      code: `PE${i + 1}`,
       price: (i + 1) * 75,
     })),
   },
@@ -85,7 +87,7 @@ function switchTab(tab) {
         tabs[key].items.forEach((item) => {
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td>${item.name}</td>
+            <td>${item.name} <span class="item-code">[${item.code}]</span></td>
             <td class="price-column">Цена: ${item.price} ₽</td>
             <td><input type="number" placeholder="0" min="0"></td>
             <td>
@@ -99,6 +101,13 @@ function switchTab(tab) {
           input.addEventListener("input", () => calculateSum(input));
           tableBody.appendChild(row);
         });
+
+        // Добавляем разделитель после каждой секции, кроме последней
+        if (key !== Object.keys(tabs)[Object.keys(tabs).length - 1]) {
+          const divider = document.createElement("tr");
+          divider.innerHTML = `<td colspan="5" class="section-divider"></td>`;
+          tableBody.appendChild(divider);
+        }
       }
     });
   } else {
@@ -109,7 +118,7 @@ function switchTab(tab) {
     tabs[tab].items.forEach((item) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${item.name}</td>
+        <td>${item.name} <span class="item-code">[${item.code}]</span></td>
         <td class="price-column">Цена: ${item.price} ₽</td>
         <td><input type="number" placeholder="0" min="0"></td>
         <td>
