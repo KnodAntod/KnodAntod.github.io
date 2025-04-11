@@ -49,64 +49,65 @@ h1 {
 }
 
 .tab-button.active {
-  background-color: #FF7F00; /* Темно-оранжевый для активной вкладки */
+  background-color: orange;
+  color: black;
 }
 
 .table-container {
-  margin-top: 40px;
+  margin-top: 30px;
   width: 80%;
-  max-width: 800px;
+  max-width: 1000px;
   overflow-x: auto;
-  margin-bottom: 50px;
+}
+
+.table-section {
+  display: none;
+}
+
+.table-section.active {
+  display: block;
 }
 
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin: 0 auto;
 }
 
 .data-table th, .data-table td {
-  padding: 10px;
-  text-align: left;
   border: 1px solid #444;
+  padding: 10px;
+  text-align: center;
 }
 
 .data-table input {
-  width: 100px;
-  padding: 5px;
-  margin: 5px;
-  border: 1px solid #555;
   background-color: #222;
   color: white;
+  border: 1px solid #444;
+  padding: 5px;
+  width: 100px;
+  text-align: center;
 }
 
 .payment-buttons {
+  display: flex;
+  gap: 10px;
   margin-top: 20px;
 }
 
 .payment-button {
-  background-color: #555;
+  background-color: #444;
   color: white;
-  padding: 15px;
-  border: 1px solid #444;
+  padding: 10px 20px;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
-  margin: 5px;
-  border-radius: 5px;
-  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
 .payment-button:hover {
-  background-color: #8ACF39; /* Салатовый */
-  border-color: #8ACF39;
+  background-color: #555;
 }
 
-.payment-button:active {
-  background-color: #444;
-}
-
-.icon {
-  /* Иконка для кнопок оплаты */
-  margin-left: 10px;
+.payment-button .icon {
+  margin-left: 5px;
 }
