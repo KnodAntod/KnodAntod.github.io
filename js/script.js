@@ -1,18 +1,34 @@
+function updateValue(id) {
+  const input = document.getElementById(id);
+  console.log(`Value for ${id}:`, input.value);
+}
+
+function switchTab(tabId) {
+  console.log(`Switched to: ${tabId}`);
+}
+
 function switchLanguage() {
-  const lang = document.getElementById('language-select').value;
+  const lang = document.getElementById("language-switcher").value;
   document.documentElement.lang = lang;
 
-  const title = document.getElementById('site-title');
-  const description = document.getElementById('site-description');
-  const inputs = document.querySelectorAll('input[type="number"]');
+  const elements = document.querySelectorAll("[data-ru]");
+  elements.forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`);
+  });
 
-  if (lang === 'en') {
-    title.textContent = 'S69F Interactive';
-    description.textContent = 'This site is hosted on GitHub Pages.';
-    inputs.forEach(input => input.placeholder = 'Enter amount');
-  } else {
-    title.textContent = 'S69F Интерактив';
-    description.textContent = 'Этот сайт размещен на GitHub Pages.';
-    inputs.forEach(input => input.placeholder = 'Введите кол-во');
-  }
+  const pageTitle = document.getElementById("page-title");
+  pageTitle.textContent = lang === "ru" ? "S69F Интерактив" : "S69F Interactive";
+
+  const amountHeader = document.getElementById("amount-header");
+  amountHeader.textContent = lang === "ru" ? "Сумма" : "Amount";
+
+  const inputs = document.querySelectorAll('input[type="number"]');
+  inputs.forEach(input => {
+    input.placeholder = lang === "ru" ? "Введите кол-во" : "Enter amount";
+  });
 }
+
+// Установка языка по умолчанию при загрузке
+document.addEventListener("DOMContentLoaded", () => {
+  switchLanguage();
+});
