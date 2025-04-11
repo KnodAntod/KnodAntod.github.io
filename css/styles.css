@@ -19,32 +19,15 @@ h1 {
   margin-top: 20px;
 }
 
-p {
-  text-align: center;
-  margin-top: 10px;
-  color: #ddd;
-}
-
-/* Стиль для выпадающего списка выбора языка */
-.language-selector {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: black;
-  padding: 10px;
-  border-radius: 5px;
+.language-selector select {
+  background-color: #333;
   color: orange;
-}
-
-select {
-  background-color: black;
-  color: orange;
-  border: none;
-  font-size: 16px;
+  border: 1px solid #444;
   padding: 5px;
+  margin-top: 20px;
+  font-size: 16px;
 }
 
-/* Вкладки */
 .tabs {
   display: flex;
   justify-content: center;
@@ -65,8 +48,11 @@ select {
   background-color: #555;
 }
 
-/* Контейнер для таблиц */
-#tables-container {
+.tab-button.active {
+  background-color: #FF7F00; /* Темно-оранжевый для активной вкладки */
+}
+
+.table-container {
   margin-top: 40px;
   width: 80%;
   max-width: 800px;
@@ -74,105 +60,53 @@ select {
   margin-bottom: 50px;
 }
 
-/* Стили для таблиц */
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #444;
-  color: white;
+  margin-bottom: 20px;
 }
 
 .data-table th, .data-table td {
   padding: 10px;
-  border: 1px solid #666;
+  text-align: left;
+  border: 1px solid #444;
 }
 
-.data-table th {
-  background-color: #555;
-}
-
-.data-table tr:nth-child(even) {
-  background-color: #666;
-}
-
-.data-table tr:nth-child(odd) {
-  background-color: #555;
-}
-
-input[type="number"] {
+.data-table input {
   width: 100px;
   padding: 5px;
-  background-color: #555;
+  margin: 5px;
+  border: 1px solid #555;
+  background-color: #222;
   color: white;
-  border: 1px solid #666;
-  border-radius: 5px;
-  text-align: center;
-  -moz-appearance: textfield;
-  -webkit-appearance: none;
-  margin-left: auto;
-  margin-right: 20px;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.payment-buttons {
+  margin-top: 20px;
 }
 
-input[type="number"]::placeholder {
-  color: #888;
-  font-style: italic;
-}
-
-input[type="number"]:focus {
-  outline: none;
-  border-color: #999;
-}
-
-/* Стиль для каждого блока таблицы */
-.table-section {
-  display: none;
-}
-
-.table-section.active {
-  display: block;
-}
-
-.table-section + .table-section {
-  margin-top: 40px;
-  border-top: 1px solid #999;
-  padding-top: 20px;
-}
-
-/* Стиль для кнопок оплаты */
 .payment-button {
   background-color: #555;
   color: white;
-  width: 25px;
-  height: 25px;
-  border: 1px solid #999;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 16px;
+  padding: 15px;
+  border: 1px solid #444;
   cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 .payment-button:hover {
-  background-color: #6C9F56;
-  border-color: transparent;
+  background-color: #8ACF39; /* Салатовый */
+  border-color: #8ACF39;
 }
 
-/* Дополнительные стили для различных частей */
-input[type="number"]:focus {
-  outline: none;
-  border-color: #999;
+.payment-button:active {
+  background-color: #444;
 }
 
-button {
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #555;
+.icon {
+  /* Иконка для кнопок оплаты */
+  margin-left: 10px;
 }
