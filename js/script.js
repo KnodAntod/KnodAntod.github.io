@@ -15,11 +15,13 @@ function updateValue(slotId) {
   console.log('Value for ' + slotId + ': ' + slotValue);
 }
 
-function switchLanguage(lang) {
+function switchLanguage() {
+  const selectedLang = document.getElementById('language-select').value;
   const pageDescription = document.getElementById('page-description');
-  if (lang === 'ru') {
+  
+  if (selectedLang === 'ru') {
     pageDescription.textContent = 'Этот сайт размещен на GitHub Pages.';
-  } else if (lang === 'en') {
+  } else if (selectedLang === 'en') {
     pageDescription.textContent = 'This site is hosted with GitHub Pages.';
   }
 }
