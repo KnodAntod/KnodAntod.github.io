@@ -7,7 +7,7 @@ const tabs = {
       { name: "Сталкер", code: "STL", price: 200 },
       { name: "Бандит", code: "BND", price: 150 },
       { name: "Ренегат", code: "RNG", price: 300 },
-      { name: "ЧН", code: "CHN", price: 250 },
+      { name: "Чистое небо", code: "CHN", price: 250 },
       { name: "Долг", code: "DLG", price: 180 },
       { name: "Свобода", code: "SVB", price: 220 },
       { name: "Военный", code: "VNY", price: 400 },
@@ -59,6 +59,7 @@ const tabs = {
 };
 
 let currentSortOrder = 'asc';
+let copyTimeout = null;
 
 function sortItemsByPrice(items, order) {
   return [...items].sort((a, b) => 
@@ -75,9 +76,12 @@ async function copyCode(code, btn) {
   try {
     await navigator.clipboard.writeText(code);
     const originalText = btn.textContent;
+    
+    if (copyTimeout) clearTimeout(copyTimeout);
+    
     btn.textContent = "Скопировано!";
     
-    setTimeout(() => {
+    copyTimeout = setTimeout(() => {
       btn.textContent = originalText;
     }, 1000);
   } catch (err) {
@@ -101,45 +105,56 @@ function calculateSum(input) {
   sumElement.textContent = sum.toLocaleString() + " ₽";
 }
 
+function createTableRow(item) {
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>
+      ${item.name}
+      <span class="item-code">[${item.code}]</span>
+      <button class="copy-btn" onclick="copyCode('${item.code}', this)">Копировать</button>
+    </td>
+    <td class="price-column">${item.price} ₽</td>
+    <td><input type="number" placeholder="0" min="0" max="1000"></td>
+    <td>
+      <div class="sum-container">
+        <span>0 ₽</span>
+      </div>
+    </td>
+    <td></td>
+  `;
+  const input = row.querySelector("input");
+  input.addEventListener("input", () => calculateSum(input));
+  return row;
+}
+
 function renderTable(items, isAllTab = false) {
   const tableBody = document.getElementById("table-body");
   tableBody.innerHTML = "";
 
   if (isAllTab) {
-    Object.keys(tabs).forEach((key) => {
-      if (key !== "tab1") {
-        const sectionTitle = document.createElement("tr");
-        sectionTitle.innerHTML = `<td colspan="5" class="tab-separator">${tabs[key].title}</td>`;
-        tableBody.appendChild(sectionTitle);
+    const groupedItems = {};
+    
+    Object.keys(tabs).forEach(key => {
+      if (key !== 'tab1') {
+        groupedItems[key] = items.filter(item => 
+          tabs[key].items.some(origItem => origItem.code === item.code)
+        );
+      }
+    });
 
-        const sortedItems = sortItemsByPrice(tabs[key].items, currentSortOrder);
-        sortedItems.forEach((item) => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>
-              ${item.name}
-              <span class="item-code">[${item.code}]</span>
-              <button class="copy-btn" onclick="copyCode('${item.code}', this)">Копировать</button>
-            </td>
-            <td class="price-column">${item.price} ₽</td>
-            <td><input type="number" placeholder="0" min="0" max="1000"></td>
-            <td>
-              <div class="sum-container">
-                <span>0 ₽</span>
-              </div>
-            </td>
-            <td></td>
-          `;
-          const input = row.querySelector("input");
-          input.addEventListener("input", () => calculateSum(input));
-          tableBody.appendChild(row);
-        });
+    Object.entries(groupedItems).forEach(([key, items], index) => {
+      const sectionTitle = document.createElement("tr");
+      sectionTitle.innerHTML = `<td colspan="5" class="tab-separator">${tabs[key].title}</td>`;
+      tableBody.appendChild(sectionTitle);
 
-        if (key !== Object.keys(tabs)[Object.keys(tabs).length - 1]) {
-          const divider = document.createElement("tr");
-          divider.innerHTML = `<td colspan="5" class="section-divider"></td>`;
-          tableBody.appendChild(divider);
-        }
+      items.forEach(item => {
+        tableBody.appendChild(createTableRow(item));
+      });
+      
+      if (index !== Object.keys(groupedItems).length - 1) {
+        const divider = document.createElement("tr");
+        divider.innerHTML = `<td colspan="5" class="section-divider"></td>`;
+        tableBody.appendChild(divider);
       }
     });
   } else {
@@ -148,26 +163,8 @@ function renderTable(items, isAllTab = false) {
     separatorRow.innerHTML = `<td colspan="5" class="tab-separator">${tabs[activeTab].title}</td>`;
     tableBody.appendChild(separatorRow);
 
-    items.forEach((item) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>
-          ${item.name}
-          <span class="item-code">[${item.code}]</span>
-          <button class="copy-btn" onclick="copyCode('${item.code}', this)">Копировать</button>
-        </td>
-        <td class="price-column">${item.price} ₽</td>
-        <td><input type="number" placeholder="0" min="0" max="1000"></td>
-        <td>
-          <div class="sum-container">
-            <span>0 ₽</span>
-          </div>
-        </td>
-        <td></td>
-      `;
-      const input = row.querySelector("input");
-      input.addEventListener("input", () => calculateSum(input));
-      tableBody.appendChild(row);
+    items.forEach(item => {
+      tableBody.appendChild(createTableRow(item));
     });
   }
 }
@@ -177,16 +174,12 @@ function handlePriceSort() {
   updatePriceHeader();
   
   const activeTab = document.querySelector('.tab-button.active').dataset.tab;
-  if (activeTab === 'tab1') {
-    const allItems = Object.values(tabs)
-      .filter(tab => tab.items)
-      .flatMap(tab => tab.items);
-    const sortedItems = sortItemsByPrice(allItems, currentSortOrder);
-    renderTable(sortedItems, true);
-  } else {
-    const sortedItems = sortItemsByPrice(tabs[activeTab].items, currentSortOrder);
-    renderTable(sortedItems);
-  }
+  const currentItems = activeTab === 'tab1' 
+    ? Object.values(tabs).flatMap(t => t.items || [])
+    : [...tabs[activeTab].items];
+  
+  const sorted = sortItemsByPrice(currentItems, currentSortOrder);
+  renderTable(sorted, activeTab === 'tab1');
 }
 
 function switchTab(tab) {
