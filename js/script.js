@@ -66,9 +66,19 @@ function copyCode(code) {
 function calculateSum(input) {
   const row = input.closest("tr");
   const price = parseInt(row.querySelector(".price-column").textContent.replace(/\D/g, ""));
-  const quantity = parseInt(input.value) || 0;
+  
+  // Ограничение количества
+  let quantity = parseInt(input.value) || 0;
+  quantity = Math.max(quantity, 0);
+  input.value = quantity;
+
+  // Ограничение суммы
+  let sum = price * quantity;
+  sum = Math.min(sum, 100000);
+  sum = Math.max(sum, 0);
+
   const sumElement = row.querySelector(".sum-container span");
-  sumElement.textContent = (price * quantity).toLocaleString() + " ₽";
+  sumElement.textContent = sum.toLocaleString() + " ₽";
 }
 
 function switchTab(tab) {
@@ -110,7 +120,6 @@ function switchTab(tab) {
           tableBody.appendChild(row);
         });
 
-        // Добавляем разделитель после каждой секции, кроме последней
         if (key !== Object.keys(tabs)[Object.keys(tabs).length - 1]) {
           const divider = document.createElement("tr");
           divider.innerHTML = `<td colspan="5" class="section-divider"></td>`;
