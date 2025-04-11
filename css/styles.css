@@ -68,3 +68,13 @@ h1 {
 .data-table tr:nth-child(odd) {
   background-color: #555;
 }
+
+input[type="number"] {
+  width: 100px;
+  padding: 5px;
+  background-color: #555;
+  color: white;
+  border: 1px solid #666;
+  border-radius: 5px;
+  text-align: center;
+}
