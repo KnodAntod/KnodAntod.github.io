@@ -141,6 +141,7 @@ td:nth-child(5) {
 .price-column {
   min-width: 100px;
   white-space: nowrap;
+  text-align: center !important;
 }
 
 /* Стиль для кода элемента */
@@ -162,16 +163,18 @@ td:nth-child(5) {
   cursor: pointer;
   transition: 0.2s;
   font-size: 0.8em;
+  opacity: 0;
 }
 
-.copy-btn:hover {
+tr:hover .copy-btn {
+  opacity: 1;
   background: rgba(255, 165, 0, 0.2);
 }
 
 /* Разделитель между вкладками в "Все" */
 .section-divider {
   height: 2px;
-  background-color: #000;
+  background-color: #444;
   margin: 15px 0;
   border: none;
 }
