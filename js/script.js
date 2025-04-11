@@ -59,7 +59,7 @@ const tabs = {
 };
 
 let currentSortOrder = 'asc';
-let copyTimeout = null;
+let isCopyLocked = false;
 
 function sortItemsByPrice(items, order) {
   return [...items].sort((a, b) => 
@@ -73,17 +73,21 @@ function updatePriceHeader() {
 }
 
 async function copyCode(code, btn) {
+  if (isCopyLocked) return;
+  
   try {
     await navigator.clipboard.writeText(code);
     const originalText = btn.textContent;
-    
-    if (copyTimeout) clearTimeout(copyTimeout);
-    
     btn.textContent = "Скопировано!";
-    
-    copyTimeout = setTimeout(() => {
+    isCopyLocked = true;
+
+    const handler = () => {
       btn.textContent = originalText;
-    }, 1000);
+      isCopyLocked = false;
+      btn.removeEventListener('mouseleave', handler);
+    };
+    
+    btn.addEventListener('mouseleave', handler);
   } catch (err) {
     console.error('Ошибка копирования:', err);
   }
@@ -111,7 +115,11 @@ function createTableRow(item) {
     <td>
       ${item.name}
       <span class="item-code">[${item.code}]</span>
-      <button class="copy-btn" onclick="copyCode('${item.code}', this)">Копировать</button>
+      <button class="copy-btn" 
+              onclick="copyCode('${item.code}', this)"
+              ${isCopyLocked ? 'disabled' : ''}>
+        Копировать
+      </button>
     </td>
     <td class="price-column">${item.price} ₽</td>
     <td><input type="number" placeholder="0" min="0" max="1000"></td>
@@ -120,7 +128,14 @@ function createTableRow(item) {
         <span>0 ₽</span>
       </div>
     </td>
-    <td></td>
+    <td>
+      <a href="https://www.donationalerts.com/r/sanchez69fullyoutube" target="_blank" class="payment-btn">
+        <img src="assets/img/DA.png" alt="DonationAlerts">
+      </a>
+      <a href="https://new.donatepay.ru/@Sanchez69full" target="_blank" class="payment-btn">
+        <img src="assets/img/DP.ico" alt="DonatePay">
+      </a>
+    </td>
   `;
   const input = row.querySelector("input");
   input.addEventListener("input", () => calculateSum(input));
@@ -174,12 +189,18 @@ function handlePriceSort() {
   updatePriceHeader();
   
   const activeTab = document.querySelector('.tab-button.active').dataset.tab;
-  const currentItems = activeTab === 'tab1' 
-    ? Object.values(tabs).flatMap(t => t.items || [])
-    : [...tabs[activeTab].items];
   
-  const sorted = sortItemsByPrice(currentItems, currentSortOrder);
-  renderTable(sorted, activeTab === 'tab1');
+  if (activeTab === 'tab1') {
+    const allItems = [];
+    Object.values(tabs).forEach(tab => {
+      if (tab.items) allItems.push(...tab.items);
+    });
+    const sorted = sortItemsByPrice(allItems, currentSortOrder);
+    renderTable(sorted, true);
+  } else {
+    const sorted = sortItemsByPrice(tabs[activeTab].items, currentSortOrder);
+    renderTable(sorted);
+  }
 }
 
 function switchTab(tab) {
@@ -189,9 +210,10 @@ function switchTab(tab) {
   activeButton.classList.add("active");
 
   if (tab === "tab1") {
-    const allItems = Object.values(tabs)
-      .filter(tab => tab.items)
-      .flatMap(tab => tab.items);
+    const allItems = [];
+    Object.values(tabs).forEach(tab => {
+      if (tab.items) allItems.push(...tab.items);
+    });
     renderTable(sortItemsByPrice(allItems, currentSortOrder), true);
   } else {
     renderTable(sortItemsByPrice(tabs[tab].items, currentSortOrder));
