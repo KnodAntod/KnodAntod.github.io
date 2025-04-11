@@ -14,12 +14,12 @@
   <h1 id="site-title">S69F Интерактив</h1>
 
   <div class="tabs">
-    <button class="tab-button" onclick="switchTab('tab1')">Все</button>
-    <button class="tab-button" onclick="switchTab('tab2')">Люди</button>
-    <button class="tab-button" onclick="switchTab('tab3')">Мутанты</button>
-    <button class="tab-button" onclick="switchTab('tab4')">Хорошие события</button>
-    <button class="tab-button" onclick="switchTab('tab5')">Нейтральные события</button>
-    <button class="tab-button" onclick="switchTab('tab6')">Плохие события</button>
+    <button class="tab-button active" data-tab="tab1" onclick="switchTab('tab1')">Все</button>
+    <button class="tab-button" data-tab="tab2" onclick="switchTab('tab2')">Люди</button>
+    <button class="tab-button" data-tab="tab3" onclick="switchTab('tab3')">Мутанты</button>
+    <button class="tab-button" data-tab="tab4" onclick="switchTab('tab4')">Хорошие события</button>
+    <button class="tab-button" data-tab="tab5" onclick="switchTab('tab5')">Нейтральные события</button>
+    <button class="tab-button" data-tab="tab6" onclick="switchTab('tab6')">Плохие события</button>
   </div>
 
   <!-- Таблица -->
@@ -30,6 +30,7 @@
           <th>Имя/Название</th>
           <th>Цена</th>
           <th>Количество</th>
+          <th>Сумма</th>
         </tr>
       </thead>
       <tbody id="table-body">
