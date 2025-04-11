@@ -58,23 +58,41 @@ const tabs = {
   },
 };
 
+let currentSortOrder = 'asc';
+
+function sortItemsByPrice(items, order) {
+  return [...items].sort((a, b) => 
+    order === 'asc' ? a.price - b.price : b.price - a.price
+  );
+}
+
+function updatePriceHeader() {
+  const header = document.querySelector('.price-header');
+  header.setAttribute('data-order', currentSortOrder);
+}
+
+function handlePriceSort() {
+  currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+  updatePriceHeader();
+  switchTab(document.querySelector('.tab-button.active').dataset.tab);
+}
+
 function copyCode(code) {
   navigator.clipboard.writeText(code);
-  alert(`Код "${code}" скопирован в буфер обмена!`);
 }
 
 function calculateSum(input) {
   const row = input.closest("tr");
   const price = parseInt(row.querySelector(".price-column").textContent.replace(/\D/g, ""));
   
-  // Ограничение количества
+  // Ограничение количества (0-1000)
   let quantity = parseInt(input.value) || 0;
-  quantity = Math.max(quantity, 0);
+  quantity = Math.max(Math.min(quantity, 1000), 0);
   input.value = quantity;
 
-  // Ограничение суммы
+  // Ограничение суммы (0-1,000,000)
   let sum = price * quantity;
-  sum = Math.min(sum, 100000);
+  sum = Math.min(sum, 1000000);
   sum = Math.max(sum, 0);
 
   const sumElement = row.querySelector(".sum-container span");
@@ -98,7 +116,8 @@ function switchTab(tab) {
         sectionTitle.innerHTML = `<td colspan="5" class="tab-separator">${tabs[key].title}</td>`;
         tableBody.appendChild(sectionTitle);
 
-        tabs[key].items.forEach((item) => {
+        const sortedItems = sortItemsByPrice(tabs[key].items, currentSortOrder);
+        sortedItems.forEach((item) => {
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>
@@ -107,7 +126,7 @@ function switchTab(tab) {
               <button class="copy-btn" onclick="copyCode('${item.code}')">Копировать</button>
             </td>
             <td class="price-column">${item.price} ₽</td>
-            <td><input type="number" placeholder="0" min="0"></td>
+            <td><input type="number" placeholder="0" min="0" max="1000"></td>
             <td>
               <div class="sum-container">
                 <span>0 ₽</span>
@@ -132,7 +151,8 @@ function switchTab(tab) {
     separatorRow.innerHTML = `<td colspan="5" class="tab-separator">${tabs[tab].title}</td>`;
     tableBody.appendChild(separatorRow);
 
-    tabs[tab].items.forEach((item) => {
+    const sortedItems = sortItemsByPrice(tabs[tab].items, currentSortOrder);
+    sortedItems.forEach((item) => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>
@@ -141,7 +161,7 @@ function switchTab(tab) {
           <button class="copy-btn" onclick="copyCode('${item.code}')">Копировать</button>
         </td>
         <td class="price-column">${item.price} ₽</td>
-        <td><input type="number" placeholder="0" min="0"></td>
+        <td><input type="number" placeholder="0" min="0" max="1000"></td>
         <td>
           <div class="sum-container">
             <span>0 ₽</span>
@@ -157,5 +177,7 @@ function switchTab(tab) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector('.price-header').addEventListener('click', handlePriceSort);
+  updatePriceHeader();
   switchTab("tab2"); // Начальная вкладка "Люди"
 });
