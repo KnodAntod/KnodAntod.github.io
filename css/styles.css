@@ -1,63 +1,47 @@
-/* Основной стиль для страницы */
 body {
   font-family: Arial, sans-serif;
-  background-color: #333333;
-  color: white;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  height: 100vh;
-  min-height: 100%;
+  background-color: #f0f0f0;
 }
 
-h1 {
-  color: orange;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.language-selector select {
+header {
   background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: right;
+}
+
+header select {
+  background-color: black;
   color: orange;
-  border: 1px solid #444;
+  border: 1px solid #ccc;
   padding: 5px;
-  margin-top: 20px;
-  font-size: 16px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .tabs {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  gap: 10px;
+  margin: 20px 0;
 }
 
 .tab-button {
-  background-color: #444;
-  color: white;
-  padding: 10px 20px;
-  border: none;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  padding: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.tab-button:hover {
-  background-color: #555;
+  margin-right: 5px;
 }
 
 .tab-button.active {
-  background-color: orange;
-  color: black;
+  background-color: darkorange;
+  color: white;
 }
 
-.table-container {
-  margin-top: 30px;
-  width: 80%;
-  max-width: 1000px;
-  overflow-x: auto;
+.tab-button:hover {
+  background-color: #ccc;
 }
 
 .table-section {
@@ -68,46 +52,34 @@ h1 {
   display: block;
 }
 
-.data-table {
+table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
+  margin: 20px 0;
 }
 
-.data-table th, .data-table td {
-  border: 1px solid #444;
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
   padding: 10px;
   text-align: center;
 }
 
-.data-table input {
-  background-color: #222;
-  color: white;
-  border: 1px solid #444;
-  padding: 5px;
+input[type="number"] {
   width: 100px;
+  padding: 5px;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: darkorange;
+}
+
+footer {
   text-align: center;
-}
-
-.payment-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.payment-button {
-  background-color: #444;
+  padding: 20px;
+  background-color: #333;
   color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.payment-button:hover {
-  background-color: #555;
-}
-
-.payment-button .icon {
-  margin-left: 5px;
 }
