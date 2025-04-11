@@ -141,3 +141,18 @@ td:nth-child(5) {
   min-width: 100px;
   white-space: nowrap;
 }
+
+/* Стиль для кода элемента */
+.item-code {
+  color: #999;
+  font-size: 0.9em;
+  margin-left: 8px;
+}
+
+/* Разделитель между вкладками в "Все" */
+.section-divider {
+  height: 2px;
+  background-color: #666;
+  margin: 15px 0;
+  border: none;
+}
