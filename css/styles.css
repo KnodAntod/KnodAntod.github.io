@@ -33,6 +33,7 @@ h1 {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  border-radius: 8px;
 }
 
 .tab-button:hover {
@@ -49,11 +50,11 @@ h1 {
   max-width: 800px;
   overflow-x: auto;
   margin-bottom: 50px;
-  scrollbar-width: none; /* Скрыть полосу прокрутки Firefox */
+  scrollbar-width: none;
 }
 
 .table-container::-webkit-scrollbar {
-  display: none; /* Скрыть полосу прокрутки Chrome/Safari */
+  display: none;
 }
 
 .data-table {
@@ -146,7 +147,7 @@ td:nth-child(5) {
 .item-code {
   color: orange;
   font-size: 0.95em;
-  margin-left: 8px;
+  margin-left: 4px;
   font-weight: 500;
 }
 
