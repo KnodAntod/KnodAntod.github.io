@@ -1,13 +1,16 @@
+/* Основной стиль для страницы */
 body {
   font-family: Arial, sans-serif;
-  background-color: #333;
+  background-color: #333333;
   color: white;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  justify-content: flex-start;
+  height: 100vh;
+  min-height: 100%;
 }
 
 h1 {
@@ -16,20 +19,32 @@ h1 {
   margin-top: 20px;
 }
 
+p {
+  text-align: center;
+  margin-top: 10px;
+  color: #ddd;
+}
+
+/* Стиль для выпадающего списка выбора языка */
 .language-selector {
   position: absolute;
   top: 10px;
   right: 10px;
+  background-color: black;
+  padding: 10px;
+  border-radius: 5px;
+  color: orange;
 }
 
-.language-selector select {
+select {
   background-color: black;
   color: orange;
-  border: 1px solid #555;
+  border: none;
+  font-size: 16px;
   padding: 5px;
-  border-radius: 5px;
 }
 
+/* Вкладки */
 .tabs {
   display: flex;
   justify-content: center;
@@ -50,14 +65,16 @@ h1 {
   background-color: #555;
 }
 
-.table-container {
+/* Контейнер для таблиц */
+#tables-container {
   margin-top: 40px;
   width: 80%;
   max-width: 800px;
+  overflow-x: auto;
   margin-bottom: 50px;
-  position: relative;
 }
 
+/* Стили для таблиц */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -112,32 +129,50 @@ input[type="number"]:focus {
   border-color: #999;
 }
 
-/* Кнопки оплаты */
-.payment-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+/* Стиль для каждого блока таблицы */
+.table-section {
+  display: none;
 }
 
+.table-section.active {
+  display: block;
+}
+
+.table-section + .table-section {
+  margin-top: 40px;
+  border-top: 1px solid #999;
+  padding-top: 20px;
+}
+
+/* Стиль для кнопок оплаты */
 .payment-button {
+  background-color: #555;
+  color: white;
   width: 25px;
   height: 25px;
-  background-color: #444;
   border: 1px solid #999;
-  border-radius: 6px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 .payment-button:hover {
-  background-color: rgba(144, 238, 144, 0.5); /* прозрачный салатовый */
+  background-color: #6C9F56;
+  border-color: transparent;
 }
 
-.icon-placeholder {
-  width: 16px;
-  height: 16px;
-  background-color: transparent;
+/* Дополнительные стили для различных частей */
+input[type="number"]:focus {
+  outline: none;
+  border-color: #999;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
 }
