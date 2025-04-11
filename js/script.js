@@ -59,10 +59,10 @@ const tabs = {
 function calculateSum(input) {
   const row = input.closest("tr");
   const priceText = row.querySelector(".price-column").textContent;
-  const price = parseInt(priceText.replace("Цена: ", "").replace(" ₽", ""));
+  const price = parseInt(priceText.replace(/\D/g, ""));
   const quantity = parseInt(input.value) || 0;
-  const sumInput = row.querySelector("td:last-child input");
-  sumInput.value = price * quantity;
+  const sumElement = row.querySelector(".sum-container span:first-child");
+  sumElement.textContent = (price * quantity).toLocaleString() + " ₽";
 }
 
 function switchTab(tab) {
@@ -79,7 +79,7 @@ function switchTab(tab) {
     Object.keys(tabs).forEach((key) => {
       if (key !== "tab1") {
         const sectionTitle = document.createElement("tr");
-        sectionTitle.innerHTML = `<td colspan="4" class="tab-separator">${tabs[key].title}</td>`;
+        sectionTitle.innerHTML = `<td colspan="5" class="tab-separator">${tabs[key].title}</td>`;
         tableBody.appendChild(sectionTitle);
 
         tabs[key].items.forEach((item) => {
@@ -87,15 +87,15 @@ function switchTab(tab) {
           row.innerHTML = `
             <td>${item.name}</td>
             <td class="price-column">Цена: ${item.price} ₽</td>
-            <td><input type="number" placeholder="Введите кол-во" min="0"></td>
+            <td><input type="number" placeholder="0" min="0"></td>
             <td>
               <div class="sum-container">
-                <input type="number" placeholder="Сумма" min="0" readonly>
-                <span class="currency">₽</span>
+                <span>0 ₽</span>
               </div>
             </td>
+            <td></td>
           `;
-          const input = row.querySelector("input[type='number']");
+          const input = row.querySelector("input");
           input.addEventListener("input", () => calculateSum(input));
           tableBody.appendChild(row);
         });
@@ -103,7 +103,7 @@ function switchTab(tab) {
     });
   } else {
     const separatorRow = document.createElement("tr");
-    separatorRow.innerHTML = `<td colspan="4" class="tab-separator">${tabs[tab].title}</td>`;
+    separatorRow.innerHTML = `<td colspan="5" class="tab-separator">${tabs[tab].title}</td>`;
     tableBody.appendChild(separatorRow);
 
     tabs[tab].items.forEach((item) => {
@@ -111,15 +111,15 @@ function switchTab(tab) {
       row.innerHTML = `
         <td>${item.name}</td>
         <td class="price-column">Цена: ${item.price} ₽</td>
-        <td><input type="number" placeholder="Введите кол-во" min="0"></td>
+        <td><input type="number" placeholder="0" min="0"></td>
         <td>
           <div class="sum-container">
-            <input type="number" placeholder="Сумма" min="0" readonly>
-            <span class="currency">₽</span>
+            <span>0 ₽</span>
           </div>
         </td>
+        <td></td>
       `;
-      const input = row.querySelector("input[type='number']");
+      const input = row.querySelector("input");
       input.addEventListener("input", () => calculateSum(input));
       tableBody.appendChild(row);
     });
@@ -127,5 +127,5 @@ function switchTab(tab) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  switchTab("tab1"); // По умолчанию открывается "Все"
+  switchTab("tab1");
 });
