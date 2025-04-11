@@ -1,62 +1,75 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>S69F Интерактив</title>
 
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-  <h1 id="site-title">S69F Интерактив</h1>
-  <p id="site-description">Этот сайт размещен на GitHub Pages.</p>
-
-  <div class="language-switcher">
-    <select id="language-select" onchange="switchLanguage()">
+  <!-- Языковой переключатель -->
+  <div class="language-selector">
+    <select id="language-switcher" onchange="switchLanguage()">
       <option value="ru" selected>Русский</option>
       <option value="en">English</option>
     </select>
   </div>
 
+  <h1 id="page-title">S69F Интерактив</h1>
+  <p>This site is hosted with GitHub Pages.</p>
+
+  <!-- Вкладки -->
   <div class="tabs">
-    <button class="tab-button" onclick="switchTab('tab1')">Все</button>
-    <button class="tab-button" onclick="switchTab('tab2')">Люди</button>
-    <button class="tab-button" onclick="switchTab('tab3')">Мутанты</button>
-    <button class="tab-button" onclick="switchTab('tab4')">Хорошие события</button>
-    <button class="tab-button" onclick="switchTab('tab5')">Нейтральные события</button>
-    <button class="tab-button" onclick="switchTab('tab6')">Плохие события</button>
+    <button class="tab-button" onclick="switchTab('tab1')" data-ru="Все" data-en="All">Все</button>
+    <button class="tab-button" onclick="switchTab('tab2')" data-ru="Люди" data-en="Humans">Люди</button>
+    <button class="tab-button" onclick="switchTab('tab3')" data-ru="Мутанты" data-en="Mutants">Мутанты</button>
+    <button class="tab-button" onclick="switchTab('tab4')" data-ru="Хорошие события" data-en="Good Events">Хорошие события</button>
+    <button class="tab-button" onclick="switchTab('tab5')" data-ru="Нейтральные события" data-en="Neutral Events">Нейтральные события</button>
+    <button class="tab-button" onclick="switchTab('tab6')" data-ru="Плохие события" data-en="Bad Events">Плохие события</button>
   </div>
 
+  <!-- Таблица -->
   <div class="table-container">
     <table class="data-table">
       <thead>
         <tr>
-          <th>Имя/Название</th>
-          <th>Сумма</th>
+          <th data-ru="Имя/Название" data-en="Name/Title">Имя/Название</th>
+          <th id="amount-header" data-ru="Сумма" data-en="Amount">Сумма</th>
         </tr>
       </thead>
       <tbody id="table-body">
-        <!-- Строки -->
-        <tr><td>Slot 1</td><td><input type="number" id="slot1" placeholder="Введите кол-во" onchange="updateValue('slot1')" min="0"></td></tr>
-        <tr><td>Slot 2</td><td><input type="number" id="slot2" placeholder="Введите кол-во" onchange="updateValue('slot2')" min="0"></td></tr>
-        <tr><td>Slot 3</td><td><input type="number" id="slot3" placeholder="Введите кол-во" onchange="updateValue('slot3')" min="0"></td></tr>
-        <tr><td>Slot 4</td><td><input type="number" id="slot4" placeholder="Введите кол-во" onchange="updateValue('slot4')" min="0"></td></tr>
-        <tr><td>Slot 5</td><td><input type="number" id="slot5" placeholder="Введите кол-во" onchange="updateValue('slot5')" min="0"></td></tr>
-        <tr><td>Slot 6</td><td><input type="number" id="slot6" placeholder="Введите кол-во" onchange="updateValue('slot6')" min="0"></td></tr>
-        <tr><td>Slot 7</td><td><input type="number" id="slot7" placeholder="Введите кол-во" onchange="updateValue('slot7')" min="0"></td></tr>
-        <tr><td>Slot 8</td><td><input type="number" id="slot8" placeholder="Введите кол-во" onchange="updateValue('slot8')" min="0"></td></tr>
-        <tr><td>Slot 9</td><td><input type="number" id="slot9" placeholder="Введите кол-во" onchange="updateValue('slot9')" min="0"></td></tr>
-        <tr><td>Slot 10</td><td><input type="number" id="slot10" placeholder="Введите кол-во" onchange="updateValue('slot10')" min="0"></td></tr>
+        <!-- 10 строк с input -->
+        ${[...Array(10)].map((_, i) => `
+          <tr>
+            <td>Slot ${i + 1}</td>
+            <td>
+              <input type="number"
+                     id="slot${i + 1}"
+                     placeholder="Введите кол-во"
+                     onchange="updateValue('slot${i + 1}')"
+                     min="0"
+                     inputmode="numeric" />
+            </td>
+          </tr>
+        `).join('')}
       </tbody>
     </table>
+
+    <!-- Кнопки оплаты -->
+    <div class="payment-buttons">
+      <a href="https://www.donationalerts.com/r/sanchez69fullyoutube" class="pay-button" target="_blank"></a>
+      <a href="https://new.donatepay.ru/@Sanchez69full" class="pay-button" target="_blank"></a>
+    </div>
   </div>
 
-  <div class="donate-buttons">
-    <button class="donate-button" onclick="window.location.href='https://www.donationalerts.com/r/sanchez69fullyoutube'"></button>
-    <button class="donate-button" onclick="window.location.href='https://new.donatepay.ru/@Sanchez69full'"></button>
-  </div>
-
+  <!-- Скрипт -->
   <script src="js/script.js"></script>
 </body>
 </html>
