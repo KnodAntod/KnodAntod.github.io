@@ -122,24 +122,25 @@ input[type="number"]:focus {
   background-color: #333;
 }
 
-/* Стили для кнопок донатов */
+/* Стили для кнопок оплаты */
 .donate-buttons {
   display: flex;
   gap: 10px;
 }
 
 .donate-button {
-  background-color: #0066cc;
+  background-color: #333; /* Темно-серый фон */
   color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px; /* Убираем округлость, чтобы кнопка была квадратной */
+  padding: 5px;
+  border: 1px solid lightgray; /* Рамка 1px светло-серого цвета */
+  border-radius: 5px; /* Закругленные края */
   cursor: pointer;
-  transition: background-color 0.3s;
-  width: 50px; /* Становится квадратной с размером 50px */
-  height: 50px;
+  transition: background-color 0.3s, color 0.3s;
+  width: 25px; /* Размер кнопки 25px */
+  height: 25px; /* Размер кнопки 25px */
 }
 
 .donate-button:hover {
-  background-color: #333;
+  background-color: #00FF00; /* Салатовый цвет при наведении */
+  color: black; /* Черный цвет текста при наведении */
 }
