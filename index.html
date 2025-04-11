@@ -3,25 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>S69F Интерактив</title>
-
-  <!-- Подключение стилей -->
-  <link rel="stylesheet" href="css/styles.css">
+  <title id="title">S69F Интерактив</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-
-  <!-- Выпадающий список выбора языка -->
-  <div class="language-selector">
-    <select id="language-select" onchange="changeLanguage()">
-      <option value="ru" selected>Русский</option>
-      <option value="en">English</option>
-    </select>
-  </div>
-
-  <h1 id="title">S69F Интерактив</h1>
-  <p id="description">Этот сайт размещен с помощью GitHub Pages.</p>
-
-  <!-- Вкладки -->
+  <header>
+    <div id="header">
+      <select id="language-select" onchange="changeLanguage()">
+        <option value="ru">Русский</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  </header>
+  
   <div class="tabs">
     <button class="tab-button active" onclick="switchTab('tab1')">Все</button>
     <button class="tab-button" onclick="switchTab('tab2')">Люди</button>
@@ -31,111 +27,92 @@
     <button class="tab-button" onclick="switchTab('tab6')">Плохие события</button>
   </div>
 
-  <!-- Таблица -->
-  <div class="table-container">
-    <div id="tab1" class="table-section active">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Имя/Название</th>
-            <th>Сумма</th>
-          </tr>
-        </thead>
-        <tbody id="table-body">
-          <!-- Таблица для вкладки "Все" (теперь не содержит собственных слотов) -->
-          <tr><td>Зомбированный</td><td><input type="number" id="people1" placeholder="Введите кол-во" onchange="updateValue('people1')" min="0"></td></tr>
-          <tr><td>Сталкер</td><td><input type="number" id="people2" placeholder="Введите кол-во" onchange="updateValue('people2')" min="0"></td></tr>
-          <tr><td>Бандит</td><td><input type="number" id="people3" placeholder="Введите кол-во" onchange="updateValue('people3')" min="0"></td></tr>
-          <tr><td>Ренегат</td><td><input type="number" id="people4" placeholder="Введите кол-во" onchange="updateValue('people4')" min="0"></td></tr>
-          <tr><td>ЧН</td><td><input type="number" id="people5" placeholder="Введите кол-во" onchange="updateValue('people5')" min="0"></td></tr>
-          <tr><td>Долг</td><td><input type="number" id="people6" placeholder="Введите кол-во" onchange="updateValue('people6')" min="0"></td></tr>
-          <tr><td>Свобода</td><td><input type="number" id="people7" placeholder="Введите кол-во" onchange="updateValue('people7')" min="0"></td></tr>
-          <tr><td>Военный</td><td><input type="number" id="people8" placeholder="Введите кол-во" onchange="updateValue('people8')" min="0"></td></tr>
-          <tr><td>Наемник</td><td><input type="number" id="people9" placeholder="Введите кол-во" onchange="updateValue('people9')" min="0"></td></tr>
-          <tr><td>Монолит</td><td><input type="number" id="people10" placeholder="Введите кол-во" onchange="updateValue('people10')" min="0"></td></tr>
-          <tr><td>Грех</td><td><input type="number" id="people11" placeholder="Введите кол-во" onchange="updateValue('people11')" min="0"></td></tr>
-          <tr><td>ИИГ</td><td><input type="number" id="people12" placeholder="Введите кол-во" onchange="updateValue('people12')" min="0"></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div id="tab2" class="table-section">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Имя/Название</th>
-            <th>Сумма</th>
-          </tr>
-        </thead>
-        <tbody id="table-body-people">
-          <!-- Таблица для вкладки "Люди" -->
-          <tr><td>Зомбированный</td><td><input type="number" id="people1" placeholder="Введите кол-во" onchange="updateValue('people1')" min="0"></td></tr>
-          <tr><td>Сталкер</td><td><input type="number" id="people2" placeholder="Введите кол-во" onchange="updateValue('people2')" min="0"></td></tr>
-          <tr><td>Бандит</td><td><input type="number" id="people3" placeholder="Введите кол-во" onchange="updateValue('people3')" min="0"></td></tr>
-          <tr><td>Ренегат</td><td><input type="number" id="people4" placeholder="Введите кол-во" onchange="updateValue('people4')" min="0"></td></tr>
-          <tr><td>ЧН</td><td><input type="number" id="people5" placeholder="Введите кол-во" onchange="updateValue('people5')" min="0"></td></tr>
-          <tr><td>Долг</td><td><input type="number" id="people6" placeholder="Введите кол-во" onchange="updateValue('people6')" min="0"></td></tr>
-          <tr><td>Свобода</td><td><input type="number" id="people7" placeholder="Введите кол-во" onchange="updateValue('people7')" min="0"></td></tr>
-          <tr><td>Военный</td><td><input type="number" id="people8" placeholder="Введите кол-во" onchange="updateValue('people8')" min="0"></td></tr>
-          <tr><td>Наемник</td><td><input type="number" id="people9" placeholder="Введите кол-во" onchange="updateValue('people9')" min="0"></td></tr>
-          <tr><td>Монолит</td><td><input type="number" id="people10" placeholder="Введите кол-во" onchange="updateValue('people10')" min="0"></td></tr>
-          <tr><td>Грех</td><td><input type="number" id="people11" placeholder="Введите кол-во" onchange="updateValue('people11')" min="0"></td></tr>
-          <tr><td>ИИГ</td><td><input type="number" id="people12" placeholder="Введите кол-во" onchange="updateValue('people12')" min="0"></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div id="tab3" class="table-section">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Имя/Название</th>
-            <th>Сумма</th>
-          </tr>
-        </thead>
-        <tbody id="table-body-mutants">
-          <!-- Таблица для вкладки "Мутанты" -->
-          <tr><td>Собака</td><td><input type="number" id="mutant1" placeholder="Введите кол-во" onchange="updateValue('mutant1')" min="0"></td></tr>
-          <tr><td>Псевдособака</td><td><input type="number" id="mutant2" placeholder="Введите кол-во" onchange="updateValue('mutant2')" min="0"></td></tr>
-          <tr><td>Полтергейст</td><td><input type="number" id="mutant3" placeholder="Введите кол-во" onchange="updateValue('mutant3')" min="0"></td></tr>
-          <tr><td>Бюрер</td><td><input type="number" id="mutant4" placeholder="Введите кол-во" onchange="updateValue('mutant4')" min="0"></td></tr>
-          <tr><td>Пси-собака</td><td><input type="number" id="mutant5" placeholder="Введите кол-во" onchange="updateValue('mutant5')" min="0"></td></tr>
-          <tr><td>Кровосос</td><td><input type="number" id="mutant6" placeholder="Введите кол-во" onchange="updateValue('mutant6')" min="0"></td></tr>
-          <tr><td>Химера</td><td><input type="number" id="mutant7" placeholder="Введите кол-во" onchange="updateValue('mutant7')" min="0"></td></tr>
-          <tr><td>Контролер</td><td><input type="number" id="mutant8" placeholder="Введите кол-во" onchange="updateValue('mutant8')" min="0"></td></tr>
-          <tr><td>Псевдогигант</td><td><input type="number" id="mutant9" placeholder="Введите кол-во" onchange="updateValue('mutant9')" min="0"></td></tr>
-          <tr><td>Библиотекарь</td><td><input type="number" id="mutant10" placeholder="Введите кол-во" onchange="updateValue('mutant10')" min="0"></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div id="tab4" class="table-section">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Имя/Название</th>
-            <th>Сумма</th>
-          </tr>
-        </thead>
-        <tbody id="table-body-good-events">
-          <!-- Таблица для вкладки "Хорошие события" -->
-          <tr><td>[ВКД]</td><td><input type="number" id="good-event1" placeholder="Введите кол-во" onchange="updateValue('good-event1')" min="0"></td></tr>
-          <tr><td>[СТЙ]</td><td><input type="number" id="good-event2" placeholder="Введите кол-во" onchange="updateValue('good-event2')" min="0"></td></tr>
-          <tr><td>[ХИЛ]</td><td><input type="number" id="good-event3" placeholder="Введите кол-во" onchange="updateValue('good-event3')" min="0"></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Остальные вкладки могут быть добавлены аналогично -->
+  <div id="tab1" class="table-section active">
+    <h2>Все</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Имя/Название</th>
+          <th>Кол-во</th>
+          <th>Цена</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
   </div>
 
-  <!-- Кнопки оплаты -->
-  <div class="payment-buttons">
-    <button class="payment-button">Оплатить через <span class="icon">[иконка]</span></button>
-    <button class="payment-button">Оплатить через <span class="icon">[иконка]</span></button>
+  <div id="tab2" class="table-section">
+    <h2>Люди</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Имя/Название</th>
+          <th>Кол-во</th>
+          <th>Цена</th>
+        </tr>
+      </thead>
+      <tbody id="table-body-people"></tbody>
+    </table>
   </div>
 
-  <!-- Подключение скрипта -->
-  <script src="js/script.js"></script>
+  <div id="tab3" class="table-section">
+    <h2>Мутанты</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Имя/Название</th>
+          <th>Кол-во</th>
+          <th>Цена</th>
+        </tr>
+      </thead>
+      <tbody id="table-body-mutants"></tbody>
+    </table>
+  </div>
+
+  <div id="tab4" class="table-section">
+    <h2>Хорошие события</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Имя/Название</th>
+          <th>Кол-во</th>
+          <th>Цена</th>
+        </tr>
+      </thead>
+      <tbody id="table-body-good-events"></tbody>
+    </table>
+  </div>
+
+  <div id="tab5" class="table-section">
+    <h2>Нейтральные события</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Имя/Название</th>
+          <th>Кол-во</th>
+          <th>Цена</th>
+        </tr>
+      </thead>
+      <tbody id="table-body-neutral-events"></tbody>
+    </table>
+  </div>
+
+  <div id="tab6" class="table-section">
+    <h2>Плохие события</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Имя/Название</th>
+          <th>Кол-во</th>
+          <th>Цена</th>
+        </tr>
+      </thead>
+      <tbody id="table-body-bad-events"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p id="description">Этот сайт размещен с помощью GitHub Pages.</p>
+  </footer>
 </body>
 </html>
