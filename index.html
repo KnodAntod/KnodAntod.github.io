@@ -2,20 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My GitHub Page</title>
 
-  <!-- Ссылка на иконки в папке assets -->
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
-  
-  <!-- Подключение внешнего CSS -->
+  <!-- Подключение стилей -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
   <h1>Sanchez69full - Interactive</h1>
   <p>This site is hosted with GitHub Pages.</p>
 
-  <!-- Подключение внешнего JavaScript -->
+  <!-- Вкладки -->
+  <div class="tabs">
+    <button class="tab-button" onclick="switchTab('tab1')">UBNC</button>
+    <button class="tab-button" onclick="switchTab('tab2')">Tab 2</button>
+    <button class="tab-button" onclick="switchTab('tab3')">Tab 3</button>
+    <button class="tab-button" onclick="switchTab('tab4')">Tab 4</button>
+  </div>
+
+  <!-- Таблица -->
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Slot</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <!-- Строки с динамическими значениями -->
+      <tr><td>Slot 1</td><td id="slot1">UBNC 2500</td></tr>
+      <tr><td>Slot 2</td><td id="slot2">UBNC 2500</td></tr>
+      <tr><td>Slot 3</td><td id="slot3">UBNC 2500</td></tr>
+      <tr><td>Slot 4</td><td id="slot4">UBNC 2500</td></tr>
+      <tr><td>Slot 5</td><td id="slot5">UBNC 2500</td></tr>
+      <tr><td>Slot 6</td><td id="slot6">UBNC 2500</td></tr>
+      <tr><td>Slot 7</td><td id="slot7">UBNC 2500</td></tr>
+      <tr><td>Slot 8</td><td id="slot8">UBNC 2500</td></tr>
+      <tr><td>Slot 9</td><td id="slot9">UBNC 2500</td></tr>
+      <tr><td>Slot 10</td><td id="slot10">UBNC 2500</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Подключение скрипта -->
   <script src="js/script.js"></script>
 </body>
 </html>
