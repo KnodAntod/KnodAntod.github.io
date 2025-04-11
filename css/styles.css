@@ -135,7 +135,7 @@ td:nth-child(3) {
 
 td:nth-child(5) {
   text-align: center;
-  width: 100px;
+  width: 120px;
 }
 
 .price-column {
@@ -190,4 +190,30 @@ td:first-child:hover .copy-btn {
 
 .price-header[data-order="desc"]::after {
   content: "↓";
+}
+
+/* Кнопки оплаты */
+.payment-btn {
+  width: 30px;
+  height: 30px;
+  background: #444;
+  border: 1px solid #666;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.payment-btn:hover {
+  background: #d35400;
+  border-color: orange;
+}
+
+.payment-btn img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
