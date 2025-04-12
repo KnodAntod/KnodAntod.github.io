@@ -1,4 +1,3 @@
-/* Основной стиль для страницы */
 body {
   font-family: Arial, sans-serif;
   background-color: #2B2B2B;
@@ -71,7 +70,6 @@ h1 {
 
 .data-table th {
   background-color: #F47C00;
-  border-bottom: none;
 }
 
 .data-table tr:nth-child(even) {
@@ -82,11 +80,16 @@ h1 {
   background-color: #4a4a4a;
 }
 
-/* Стили для кнопки копирования */
 .copy-container {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  position: relative;
+}
+
+.item-code {
+  color: #F47C00;
+  margin-left: 6px;
 }
 
 .copy-btn {
@@ -97,32 +100,64 @@ h1 {
   cursor: pointer;
   width: 20px;
   height: 20px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+tr:hover .copy-btn {
+  opacity: 1;
 }
 
 .copy-btn img {
   width: 100%;
   height: 100%;
-  filter: invert(71%) sepia(64%) saturate(1418%) hue-rotate(353deg) brightness(101%) contrast(102%);
+  filter: brightness(1) saturate(2) sepia(1) hue-rotate(-20deg);
 }
 
-/* Стили для ввода количества */
 .quantity-control {
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 0;
 }
 
 .quantity-btn {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   background: #444;
   border: 1px solid #777;
-  border-radius: 4px;
   color: orange;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.quantity-btn:first-child {
+  border-radius: 6px 0 0 6px;
+  margin-right: 4px;
+}
+
+.quantity-btn:last-child {
+  border-radius: 0 6px 6px 0;
+  margin-left: 4px;
+}
+
+.quantity-control.active .quantity-btn:first-child,
+.quantity-control.active .quantity-btn:last-child {
+  margin: 0;
+  border-radius: 0;
+}
+
+.quantity-control.active .quantity-btn:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.quantity-control.active .quantity-btn:last-child {
+  border-radius: 0 6px 6px 0;
 }
 
 .quantity-input {
@@ -141,28 +176,6 @@ h1 {
   margin: 0;
 }
 
-/* Остальные стили */
-.tab-separator {
-  text-align: center;
-  background-color: #555;
-  color: #F47C00;
-  padding: 10px;
-  font-weight: bold;
-}
-
-.section-divider {
-  height: 2px;
-  background-color: #444;
-  margin: 15px 0;
-  border: none;
-}
-
-.price-column {
-  min-width: 100px;
-  white-space: nowrap;
-  text-align: center;
-}
-
 .sum-container {
   display: flex;
   align-items: center;
@@ -179,7 +192,6 @@ h1 {
   font-weight: bold;
 }
 
-/* Кнопки оплаты */
 .payment-btn {
   width: 30px;
   height: 30px;
