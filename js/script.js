@@ -65,12 +65,12 @@ async function copyCode(code, btn) {
   
   try {
     await navigator.clipboard.writeText(code);
-    const originalText = btn.textContent;
-    btn.textContent = "Скопировано!";
+    const icon = btn.querySelector('img');
+    icon.src = 'assets/img/icon_copy_plus.svg';
     isCopyLocked = true;
 
     const handler = () => {
-      btn.textContent = originalText;
+      icon.src = 'assets/img/icon_copy.svg';
       isCopyLocked = false;
       btn.removeEventListener('mouseleave', handler);
     };
@@ -103,10 +103,8 @@ function createTableRow(item) {
     <td>
       ${item.name}
       <span class="item-code">[${item.code}]</span>
-      <button class="copy-btn" 
-              onclick="copyCode('${item.code}', this)"
-              ${isCopyLocked ? 'disabled' : ''}>
-        Копировать
+      <button class="copy-btn" onclick="copyCode('${item.code}', this)">
+        <img src="assets/img/icon_copy.svg" alt="Копировать">
       </button>
     </td>
     <td class="price-column">${item.price} ₽</td>
