@@ -62,16 +62,19 @@ let isCopyLocked = false;
 
 async function copyCode(code, btn) {
   if (isCopyLocked) return;
+
   try {
     await navigator.clipboard.writeText(code);
     const icon = btn.querySelector('img');
     icon.src = 'assets/img/icon_copy_plus.svg';
     isCopyLocked = true;
+
     const handler = () => {
       icon.src = 'assets/img/icon_copy.svg';
       isCopyLocked = false;
       btn.removeEventListener('mouseleave', handler);
     };
+
     btn.addEventListener('mouseleave', handler);
   } catch (err) {
     console.error('Ошибка копирования:', err);
@@ -82,17 +85,23 @@ function calculateSum(input) {
   const row = input.closest("tr");
   const price = parseInt(row.querySelector(".price-column").textContent.replace(/\D/g, ""));
   let quantity = parseInt(input.value) || 0;
-  quantity = Math.min(Math.max(quantity, 0), 1000);
+  quantity = Math.max(Math.min(quantity, 1000), 0);
   input.value = quantity;
-  const sum = Math.min(price * quantity, 1_000_000);
-  row.querySelector(".sum-container span").textContent = sum.toLocaleString() + " ₽";
+
+  const qControl = row.querySelector(".quantity-control");
+  qControl.classList.toggle("active", quantity > 0);
+
+  let sum = price * quantity;
+  sum = Math.max(Math.min(sum, 1000000), 0);
+
+  const sumElement = row.querySelector(".sum-container span");
+  sumElement.textContent = sum.toLocaleString() + " ₽";
 }
 
 function adjustQuantity(btn, delta) {
   const input = btn.parentNode.querySelector('.quantity-input');
   let value = parseInt(input.value) || 0;
-  value = Math.max(value + delta, 0);
-  input.value = value;
+  input.value = Math.max(value + delta, 0);
   calculateSum(input);
 }
 
@@ -112,14 +121,21 @@ function createTableRow(item) {
     <td>
       <div class="quantity-control">
         <button class="quantity-btn" onclick="adjustQuantity(this, -1)">-</button>
-        <input type="number" class="quantity-input" value="0" min="0" max="1000"
+        <input type="number" 
+               class="quantity-input" 
+               value="0" 
+               min="0" 
+               max="1000"
+               pattern="\\d*"
                oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value > 1000) this.value = 1000;"
                onchange="calculateSum(this)">
         <button class="quantity-btn" onclick="adjustQuantity(this, 1)">+</button>
       </div>
     </td>
     <td>
-      <div class="sum-container"><span>0 ₽</span></div>
+      <div class="sum-container">
+        <span>0 ₽</span>
+      </div>
     </td>
     <td>
       <a href="https://www.donationalerts.com/r/sanchez69fullyoutube" target="_blank" class="payment-btn">
@@ -137,35 +153,37 @@ function renderTable(items, isAllTab = false) {
   const tableBody = document.getElementById("table-body");
   tableBody.innerHTML = "";
 
-  const relevantItems = isAllTab
-    ? Object.values(tabs).flatMap(tab => tab.items || [])
-    : items;
+  if (isAllTab) {
+    const groupedItems = {};
+    Object.keys(tabs).forEach(key => {
+      if (key !== 'tab1') {
+        groupedItems[key] = items.filter(item =>
+          tabs[key].items.some(origItem => origItem.code === item.code)
+        );
+      }
+    });
 
-  relevantItems.forEach(item => {
-    tableBody.appendChild(createTableRow(item));
-  });
+    Object.entries(groupedItems).forEach(([, items]) => {
+      items.forEach(item => tableBody.appendChild(createTableRow(item)));
+    });
+  } else {
+    items.forEach(item => tableBody.appendChild(createTableRow(item)));
+  }
 }
 
 function switchTab(tab) {
-  document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-button").forEach(button => button.classList.remove("active"));
   document.querySelector(`.tab-button[data-tab="${tab}"]`).classList.add("active");
 
-  const tableBody = document.getElementById("table-body");
-  tableBody.classList.add("fade-exit-active");
-
-  setTimeout(() => {
-    tableBody.classList.remove("fade-exit-active");
-
-    if (tab === "tab1") {
-      const allItems = Object.values(tabs).flatMap(t => t.items || []);
-      renderTable(allItems, true);
-    } else {
-      renderTable(tabs[tab].items);
-    }
-
-    tableBody.classList.add("fade-enter");
-    setTimeout(() => tableBody.classList.remove("fade-enter"), 10);
-  }, 150);
+  if (tab === "tab1") {
+    const allItems = [];
+    Object.values(tabs).forEach(tab => {
+      if (tab.items) allItems.push(...tab.items);
+    });
+    renderTable(allItems, true);
+  } else {
+    renderTable(tabs[tab].items);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
