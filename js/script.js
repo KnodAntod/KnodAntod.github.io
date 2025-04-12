@@ -97,18 +97,39 @@ function calculateSum(input) {
   sumElement.textContent = sum.toLocaleString() + " ₽";
 }
 
+function adjustQuantity(btn, delta) {
+  const input = btn.parentNode.querySelector('.quantity-input');
+  let value = parseInt(input.value) || 0;
+  value = Math.max(value + delta, 0);
+  input.value = value;
+  calculateSum(input);
+}
+
 function createTableRow(item) {
   const row = document.createElement("tr");
   row.innerHTML = `
     <td>
-      ${item.name}
-      <span class="item-code">[${item.code}]</span>
-      <button class="copy-btn" onclick="copyCode('${item.code}', this)">
-        <img src="assets/img/icon_copy.svg" alt="Копировать">
-      </button>
+      <div class="copy-container">
+        <span>${item.name}</span>
+        <span class="item-code">[${item.code}]</span>
+        <button class="copy-btn" onclick="copyCode('${item.code}', this)">
+          <img src="assets/img/icon_copy.svg" alt="Копировать">
+        </button>
+      </div>
     </td>
     <td class="price-column">${item.price} ₽</td>
-    <td><input type="number" placeholder="0" min="0" max="1000"></td>
+    <td>
+      <div class="quantity-control">
+        <button class="quantity-btn" onclick="adjustQuantity(this, -1)">-</button>
+        <input type="number" 
+               class="quantity-input" 
+               value="0" 
+               min="0" 
+               max="1000"
+               onchange="calculateSum(this)">
+        <button class="quantity-btn" onclick="adjustQuantity(this, 1)">+</button>
+      </div>
+    </td>
     <td>
       <div class="sum-container">
         <span>0 ₽</span>
@@ -127,8 +148,6 @@ function createTableRow(item) {
       </a>
     </td>
   `;
-  const input = row.querySelector("input");
-  input.addEventListener("input", () => calculateSum(input));
   return row;
 }
 
