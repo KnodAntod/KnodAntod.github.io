@@ -72,15 +72,17 @@ function createTableRow(item) {
     </td>
     <td class="price-column">${item.price}</td>
     <td>
-      <div class="quantity-control">
-        <button class="quantity-btn" onclick="adjustQuantity(this, -1)">-</button>
-        <input type="number" class="quantity-input" value="0" min="0" max="1000"
+      <div class="input-control">
+        <button class="btn-decrease" onclick="adjustQuantity(this, -1)">-</button>
+        <input type="number" value="0" min="0" max="1000"
                oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value > 1000) this.value = 1000;"
                onchange="calculateSum(this)">
-        <button class="quantity-btn" onclick="adjustQuantity(this, 1)">+</button>
+        <button class="btn-increase" onclick="adjustQuantity(this, 1)">+</button>
       </div>
     </td>
-    <td><div class="sum-container"><span>0</span></div></td>
+    <td>
+      <div class="sum-container"><span>0</span></div>
+    </td>
     <td>
       <div style="display: flex; justify-content: center;">
         <a href="https://www.donationalerts.com/r/sanchez69fullyoutube" target="_blank" class="payment-btn">
@@ -105,8 +107,9 @@ function calculateSum(input) {
 }
 
 function adjustQuantity(btn, delta) {
-  const input = btn.parentNode.querySelector('.quantity-input');
-  input.value = Math.max((parseInt(input.value) || 0) + delta, 0);
+  const input = btn.parentNode.querySelector('input[type="number"]');
+  const newValue = Math.max((parseInt(input.value) || 0) + delta, 0);
+  input.value = newValue;
   calculateSum(input);
 }
 
@@ -115,7 +118,9 @@ async function copyCode(code, btn) {
     await navigator.clipboard.writeText(code);
     const icon = btn.querySelector('img');
     icon.src = 'assets/img/icon_copy_plus.svg';
-    setTimeout(() => (icon.src = 'assets/img/icon_copy.svg'), 1000);
+    setTimeout(() => {
+      icon.src = 'assets/img/icon_copy.svg';
+    }, 1000);
   } catch (err) {
     console.error("Ошибка копирования:", err);
   }
@@ -136,10 +141,16 @@ function renderTable(items, isAllTab = false) {
       groupRow.appendChild(cell);
       tableBody.appendChild(groupRow);
 
-      tab.items.forEach(item => tableBody.appendChild(createTableRow(item)));
+      tab.items.forEach(item => {
+        const row = createTableRow(item);
+        tableBody.appendChild(row);
+      });
     });
   } else {
-    items.forEach(item => tableBody.appendChild(createTableRow(item)));
+    items.forEach(item => {
+      const row = createTableRow(item);
+      tableBody.appendChild(row);
+    });
   }
 }
 
