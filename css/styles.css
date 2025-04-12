@@ -205,3 +205,157 @@ h1 {
   object-fit: contain;
   background: transparent !important;
 }
+
+
+/* Копирование: иконка оранжевая без заливки, появляется при наведении */
+.copy-icon {
+  fill: none;
+  stroke: #F47C00;
+  vertical-align: middle;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.row:hover .copy-icon {
+  opacity: 1;
+}
+
+/* Смещение иконки по вертикали */
+.row-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copy-icon-container {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  margin-top: 2px;
+}
+
+/* Центрирование поля ввода и кнопок */
+.input-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+/* Кнопки + и - без скруглений */
+.input-control button {
+  border-radius: 0;
+}
+
+/* Поле ввода только для цифр, ограничение до 1000 */
+input[type="number"] {
+  text-align: center;
+  max-width: 60px;
+  border-radius: 0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Цвет блоков с кодом */
+code {
+  color: #F47C00;
+}
+
+
+/* Кнопки управления: скругление только внешних сторон */
+.input-control button:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-control button:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-control input[type="number"] {
+  border-radius: 0;
+}
+
+
+/* Объединение кнопок и поля ввода без зазоров */
+.input-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+.input-control button,
+.input-control input[type="number"] {
+  border: 1px solid #ccc;
+  height: 36px;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.input-control input[type="number"] {
+  width: 60px;
+  text-align: center;
+  border-left: none;
+  border-right: none;
+}
+
+
+/* Начальное состояние — элементы разделены */
+.input-control.split button,
+.input-control.split input[type="number"] {
+  border: 1px solid #ccc;
+  margin: 0 2px;
+  border-radius: 8px;
+}
+
+/* Активное состояние — единый стиль */
+.input-control.compact {
+  gap: 0;
+}
+
+.input-control.compact button,
+.input-control.compact input[type="number"] {
+  border: 1px solid #ccc;
+  height: 36px;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.input-control.compact input[type="number"] {
+  width: 60px;
+  text-align: center;
+  border-left: none;
+  border-right: none;
+}
+
+.input-control.compact button:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-control.compact button:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-control.compact input[type="number"] {
+  border-radius: 0;
+}
