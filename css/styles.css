@@ -100,8 +100,6 @@ h1 {
 
 .col-name {
   width: 160px;
-  min-width: 100px;
-  max-width: 180px;
 }
 
 .col-narrow {
@@ -113,6 +111,11 @@ h1 {
   align-items: center;
   gap: 8px;
   justify-content: flex-start;
+  position: relative;
+}
+
+.copy-container:hover .copy-btn {
+  opacity: 1;
 }
 
 .item-code {
@@ -125,57 +128,66 @@ h1 {
   border: none;
   cursor: pointer;
   padding: 0;
-  margin: 0;
+  margin: 2px 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.2s;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .copy-btn img {
-  width: 20px;
-  height: 20px;
-  filter: brightness(1) saturate(2) sepia(1) hue-rotate(100deg);
+  width: 22px;
+  height: 22px;
+  filter: brightness(1) saturate(2) sepia(1) hue-rotate(90deg);
 }
 
-.quantity-control {
+.input-control {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 36px;
+  background-color: #2b2b3d;
+  border: 1px solid #3a3a4d;
 }
 
-.quantity-btn {
-  width: 30px;
-  height: 30px;
-  background: #2b2b3d;
-  border: 1px solid #777;
+.input-control button {
+  width: 32px;
+  height: 100%;
+  background-color: #2b2b3d;
   color: #e0e0e0;
-  font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
+  border: none;
   cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s;
 }
 
-.quantity-btn:first-child {
+.input-control button:hover {
+  background-color: #393952;
+}
+
+.input-control .btn-decrease {
   border-radius: 6px 0 0 6px;
 }
 
-.quantity-btn:last-child {
+.input-control .btn-increase {
   border-radius: 0 6px 6px 0;
 }
 
-.quantity-input {
-  width: 50px;
-  padding: 5px;
-  background-color: #444;
-  border: 1px solid #777;
-  color: #e0e0e0;
+.input-control input {
+  width: 40px;
   text-align: center;
-  margin: 0 4px;
+  background-color: #2b2b3d;
+  color: #e0e0e0;
+  border: none;
+  font-size: 14px;
+  height: 100%;
   -moz-appearance: textfield;
 }
 
-.quantity-input::-webkit-inner-spin-button,
-.quantity-input::-webkit-outer-spin-button {
+.input-control input::-webkit-inner-spin-button,
+.input-control input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
