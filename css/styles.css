@@ -1,42 +1,42 @@
 body {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   background-color: #2B2B2B;
   color: white;
   margin: 0;
   padding: 0;
-  font-size: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   height: 100vh;
+  min-height: 100%;
 }
 
 h1 {
   color: #F47C00;
   text-align: center;
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .tabs {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px;
   gap: 10px;
 }
 
 .tab-button {
-  background-color: #444;
+  background-color: #444444;
   color: white;
-  padding: 10px 18px;
+  padding: 10px 20px;
   border: none;
   cursor: pointer;
-  border-radius: 8px;
   transition: background-color 0.3s;
+  border-radius: 8px;
 }
 
 .tab-button:hover {
-  background-color: #555;
+  background-color: #555555;
 }
 
 .tab-button.active {
@@ -44,11 +44,11 @@ h1 {
 }
 
 .table-container {
-  margin-top: 30px;
-  width: 90%;
-  max-width: 720px;
+  margin-top: 40px;
+  width: 80%;
+  max-width: 800px;
   overflow-x: auto;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   scrollbar-width: none;
 }
 
@@ -59,28 +59,17 @@ h1 {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #3A3A3A;
+  background-color: #444444;
   color: white;
+}
+
+.data-table th, .data-table td {
+  padding: 10px;
+  border: 1px solid #666666;
 }
 
 .data-table th {
   background-color: #F47C00;
-  border: none;
-  position: sticky;
-  top: 0;
-  text-align: center;
-  font-weight: bold;
-}
-
-.data-table td {
-  padding: 8px 10px;
-  font-size: 15px;
-  text-align: center;
-  border: 1px solid #555;
-}
-
-.data-table td:first-child {
-  text-align: left;
 }
 
 .data-table tr:nth-child(even) {
@@ -88,20 +77,19 @@ h1 {
 }
 
 .data-table tr:nth-child(odd) {
-  background-color: #464646;
+  background-color: #4a4a4a;
 }
 
 .copy-container {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  position: relative;
 }
 
 .item-code {
-  color: #FFD700;
-  font-weight: bold;
-  font-size: 14px;
-  margin-left: 4px;
+  color: #F47C00;
+  margin-left: 6px;
 }
 
 .copy-btn {
@@ -110,11 +98,9 @@ h1 {
   padding: 0;
   margin: 0;
   cursor: pointer;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   opacity: 0;
-  position: relative;
-  top: 1px;
   transition: opacity 0.2s;
 }
 
@@ -125,7 +111,7 @@ tr:hover .copy-btn {
 .copy-btn img {
   width: 100%;
   height: 100%;
-  filter: brightness(1.1) saturate(1.5) hue-rotate(-15deg);
+  filter: brightness(1) saturate(2) sepia(1) hue-rotate(-20deg);
 }
 
 .quantity-control {
@@ -136,17 +122,18 @@ tr:hover .copy-btn {
 }
 
 .quantity-btn {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   background: #444;
   border: 1px solid #777;
-  color: #F47C00;
+  color: orange;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.2s;
 }
 
 .quantity-btn:first-child {
@@ -159,13 +146,28 @@ tr:hover .copy-btn {
   margin-left: 4px;
 }
 
+.quantity-control.active .quantity-btn:first-child,
+.quantity-control.active .quantity-btn:last-child {
+  margin: 0;
+  border-radius: 0;
+}
+
+.quantity-control.active .quantity-btn:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.quantity-control.active .quantity-btn:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
 .quantity-input {
   width: 50px;
-  padding: 4px;
+  padding: 5px;
   background-color: #444;
   border: 1px solid #777;
   color: white;
   text-align: center;
+  -moz-appearance: textfield;
 }
 
 .quantity-input::-webkit-inner-spin-button,
@@ -178,6 +180,7 @@ tr:hover .copy-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 5px;
   background-color: #555;
   border: 1px solid #666;
   border-radius: 5px;
@@ -200,7 +203,7 @@ tr:hover .copy-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, border-color 0.2s;
+  transition: 0.2s;
 }
 
 .payment-btn:hover {
@@ -212,43 +215,5 @@ tr:hover .copy-btn {
   width: 20px;
   height: 20px;
   object-fit: contain;
-}
-
-/* Анимация при смене вкладки */
-.fade-enter {
-  opacity: 0;
-}
-.fade-enter-active {
-  opacity: 1;
-  transition: opacity 300ms;
-}
-.fade-exit-active {
-  opacity: 0;
-  transition: opacity 150ms;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
-  }
-
-  .tab-button {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .quantity-input {
-    width: 40px;
-  }
-
-  .sum-container {
-    min-width: 60px;
-    font-size: 14px;
-  }
-
-  .payment-btn img {
-    width: 16px;
-    height: 16px;
-  }
+  background: transparent !important;
 }
