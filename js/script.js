@@ -89,18 +89,11 @@ function calculateSum(input) {
   input.value = quantity;
 
   const qControl = row.querySelector(".quantity-control");
-  if (quantity > 0) {
-    qControl.classList.add("active");
-  } else {
-    qControl.classList.remove("active");
-  }
+  qControl.classList.toggle("active", quantity > 0);
 
   let sum = price * quantity;
   sum = Math.min(sum, 1000000);
-  sum = Math.max(sum, 0);
-
-  const sumElement = row.querySelector(".sum-container span");
-  sumElement.textContent = sum.toLocaleString() + " ₽";
+  row.querySelector(".sum-container span").textContent = sum.toLocaleString() + " ₽";
 }
 
 function adjustQuantity(btn, delta) {
@@ -127,21 +120,18 @@ function createTableRow(item) {
     <td>
       <div class="quantity-control">
         <button class="quantity-btn" onclick="adjustQuantity(this, -1)">-</button>
-        <input type="number" 
-               class="quantity-input" 
-               value="0" 
-               min="0" 
+        <input type="number"
+               class="quantity-input"
+               value="0"
+               min="0"
                max="1000"
-               pattern="\\d*"
                oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value > 1000) this.value = 1000;"
                onchange="calculateSum(this)">
         <button class="quantity-btn" onclick="adjustQuantity(this, 1)">+</button>
       </div>
     </td>
     <td>
-      <div class="sum-container">
-        <span>0 ₽</span>
-      </div>
+      <div class="sum-container"><span>0 ₽</span></div>
     </td>
     <td>
       <a href="https://www.donationalerts.com/r/sanchez69fullyoutube" target="_blank" class="payment-btn">
@@ -169,10 +159,8 @@ function renderTable(items, isAllTab = false) {
       }
     });
 
-    Object.entries(groupedItems).forEach(([, items]) => {
-      items.forEach(item => {
-        tableBody.appendChild(createTableRow(item));
-      });
+    Object.values(groupedItems).flat().forEach(item => {
+      tableBody.appendChild(createTableRow(item));
     });
   } else {
     items.forEach(item => {
@@ -185,15 +173,27 @@ function switchTab(tab) {
   document.querySelectorAll(".tab-button").forEach(button => button.classList.remove("active"));
   document.querySelector(`.tab-button[data-tab="${tab}"]`).classList.add("active");
 
-  if (tab === "tab1") {
-    const allItems = [];
-    Object.values(tabs).forEach(tab => {
-      if (tab.items) allItems.push(...tab.items);
-    });
-    renderTable(allItems, true);
-  } else {
-    renderTable(tabs[tab].items);
-  }
+  const tableBody = document.getElementById("table-body");
+  tableBody.classList.add("fade-exit-active");
+
+  setTimeout(() => {
+    tableBody.classList.remove("fade-exit-active");
+
+    if (tab === "tab1") {
+      const allItems = [];
+      Object.values(tabs).forEach(tab => {
+        if (tab.items) allItems.push(...tab.items);
+      });
+      renderTable(allItems, true);
+    } else {
+      renderTable(tabs[tab].items);
+    }
+
+    tableBody.classList.add("fade-enter");
+    setTimeout(() => {
+      tableBody.classList.remove("fade-enter");
+    }, 10);
+  }, 150);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
