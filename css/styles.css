@@ -92,19 +92,22 @@ h1 {
 }
 
 .data-table tr:nth-child(even) {
-  background-color: #2f2f42;
+  background-color: #2b2b3d;
 }
 
 .data-table tr:nth-child(odd) {
-  background-color: #3a3a52;
+  background-color: #2f2f42;
+}
+
+.data-table tr:hover {
+  background-color: #393952;
 }
 
 .copy-container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  position: relative;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
 }
 
 .item-code {
@@ -116,10 +119,9 @@ h1 {
   background: none;
   border: none;
   cursor: pointer;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   opacity: 0.7;
-  margin-left: 2px;
   transition: opacity 0.2s;
 }
 
