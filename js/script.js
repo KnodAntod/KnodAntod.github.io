@@ -70,7 +70,7 @@ function createTableRow(item) {
         </button>
       </div>
     </td>
-    <td class="price-column">${item.price} ₽</td>
+    <td class="price-column">${item.price}</td>
     <td>
       <div class="quantity-control">
         <button class="quantity-btn" onclick="adjustQuantity(this, -1)">-</button>
@@ -80,7 +80,7 @@ function createTableRow(item) {
         <button class="quantity-btn" onclick="adjustQuantity(this, 1)">+</button>
       </div>
     </td>
-    <td><div class="sum-container"><span>0 ₽</span></div></td>
+    <td><div class="sum-container"><span>0</span></div></td>
     <td>
       <div style="display: flex; justify-content: center;">
         <a href="https://www.donationalerts.com/r/sanchez69fullyoutube" target="_blank" class="payment-btn">
@@ -101,7 +101,7 @@ function calculateSum(input) {
   const quantity = Math.min(Math.max(parseInt(input.value) || 0, 0), 1000);
   input.value = quantity;
   const sum = Math.min(price * quantity, 1_000_000);
-  row.querySelector(".sum-container span").textContent = `${sum.toLocaleString()} ₽`;
+  row.querySelector(".sum-container span").textContent = sum.toLocaleString();
 }
 
 function adjustQuantity(btn, delta) {
