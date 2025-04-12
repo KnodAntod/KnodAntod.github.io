@@ -213,23 +213,3 @@ function switchTab(tab) {
 document.addEventListener("DOMContentLoaded", () => {
   switchTab("tab2");
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".input-control input[type='number']").forEach(input => {
-    const control = input.closest(".input-control");
-    if (control) control.classList.add("split");
-
-    const updateStyle = () => {
-      if (parseInt(input.value) > 0) {
-        control.classList.remove("split");
-        control.classList.add("compact");
-      } else {
-        control.classList.remove("compact");
-        control.classList.add("split");
-      }
-    };
-
-    input.addEventListener("input", updateStyle);
-    updateStyle();
-  });
-});
