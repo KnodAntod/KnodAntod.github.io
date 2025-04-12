@@ -1,19 +1,17 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #2B2B2B;
-  color: white;
+  background-color: #1e1e2f;
+  color: #e0e0e0;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  height: 100vh;
   min-height: 100%;
 }
 
 h1 {
-  color: #F47C00;
+  color: #00c389;
   text-align: center;
   margin-top: 20px;
 }
@@ -21,32 +19,49 @@ h1 {
 .tabs {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px 0 10px;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 .tab-button {
-  background-color: #444444;
-  color: white;
-  padding: 10px 20px;
+  background-color: #2b2b3d;
+  color: #a0a0a0;
+  padding: 10px 16px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s;
   border-radius: 8px;
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s, background-color 0.3s;
 }
 
 .tab-button:hover {
-  background-color: #555555;
+  color: #e0e0e0;
+  background-color: #383850;
 }
 
 .tab-button.active {
-  background-color: #F47C00;
+  color: #00c389;
+  background-color: #2b2b3d;
+}
+
+.tab-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 20px);
+  height: 3px;
+  background-color: #00c389;
+  border-radius: 2px;
 }
 
 .table-container {
-  margin-top: 40px;
-  width: 80%;
-  max-width: 800px;
+  margin-top: 20px;
+  width: 90%;
+  max-width: 1000px;
   overflow-x: auto;
   margin-bottom: 50px;
   scrollbar-width: none;
@@ -59,52 +74,56 @@ h1 {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #444444;
-  color: white;
+  background-color: #2b2b3d;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .data-table th, .data-table td {
   padding: 10px;
-  border: 1px solid #666666;
+  border: 1px solid #444;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .data-table th {
-  background-color: #F47C00;
+  background-color: #00c389;
+  color: #1e1e2f;
 }
 
 .data-table tr:nth-child(even) {
-  background-color: #3d3d3d;
+  background-color: #2f2f42;
 }
 
 .data-table tr:nth-child(odd) {
-  background-color: #4a4a4a;
+  background-color: #3a3a52;
 }
 
 .copy-container {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
   position: relative;
 }
 
 .item-code {
-  color: #F47C00;
-  margin-left: 6px;
+  color: #00c389;
+  font-size: 13px;
 }
 
 .copy-btn {
   background: none;
   border: none;
-  padding: 0;
-  margin: 0;
   cursor: pointer;
   width: 20px;
   height: 20px;
-  opacity: 0;
+  opacity: 0.7;
+  margin-left: 2px;
   transition: opacity 0.2s;
 }
 
-tr:hover .copy-btn {
+.copy-btn:hover {
   opacity: 1;
 }
 
@@ -118,7 +137,6 @@ tr:hover .copy-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
 }
 
 .quantity-btn {
@@ -128,36 +146,10 @@ tr:hover .copy-btn {
   border: 1px solid #777;
   color: orange;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-weight: bold;
   font-size: 16px;
+  border-radius: 5px;
   transition: background-color 0.2s;
-}
-
-.quantity-btn:first-child {
-  border-radius: 6px 0 0 6px;
-  margin-right: 4px;
-}
-
-.quantity-btn:last-child {
-  border-radius: 0 6px 6px 0;
-  margin-left: 4px;
-}
-
-.quantity-control.active .quantity-btn:first-child,
-.quantity-control.active .quantity-btn:last-child {
-  margin: 0;
-  border-radius: 0;
-}
-
-.quantity-control.active .quantity-btn:first-child {
-  border-radius: 6px 0 0 6px;
-}
-
-.quantity-control.active .quantity-btn:last-child {
-  border-radius: 0 6px 6px 0;
 }
 
 .quantity-input {
@@ -167,39 +159,27 @@ tr:hover .copy-btn {
   border: 1px solid #777;
   color: white;
   text-align: center;
-  -moz-appearance: textfield;
-}
-
-.quantity-input::-webkit-inner-spin-button,
-.quantity-input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  margin: 0 4px;
 }
 
 .sum-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
   background-color: #555;
   border: 1px solid #666;
   border-radius: 5px;
   padding: 5px;
   min-width: 80px;
-}
-
-.sum-container span {
+  color: #3de58d;
   font-weight: bold;
 }
 
 .payment-btn {
   width: 30px;
   height: 30px;
-  background: #444;
+  background: #2b2b3d;
   border: 1px solid #666;
   border-radius: 5px;
   cursor: pointer;
-  margin: 0 2px;
+  margin: 2px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -207,13 +187,20 @@ tr:hover .copy-btn {
 }
 
 .payment-btn:hover {
-  background: #F47C00;
-  border-color: #F47C00;
+  background: #00c389;
+  border-color: #00c389;
 }
 
 .payment-btn img {
   width: 20px;
   height: 20px;
   object-fit: contain;
-  background: transparent !important;
+}
+
+.group-label {
+  margin: 24px 0 8px;
+  color: #a0a0a0;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
 }
