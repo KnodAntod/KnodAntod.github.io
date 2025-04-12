@@ -23,10 +23,11 @@ h1 {
   justify-content: center;
   margin-top: 20px;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .tab-button {
-  background-color: #444444;
+  background-color: #444;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -36,7 +37,7 @@ h1 {
 }
 
 .tab-button:hover {
-  background-color: #555555;
+  background-color: #555;
 }
 
 .tab-button.active {
@@ -59,17 +60,23 @@ h1 {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #444444;
+  background-color: #444;
   color: white;
-}
-
-.data-table th, .data-table td {
-  padding: 10px;
-  border: 1px solid #666666;
 }
 
 .data-table th {
   background-color: #F47C00;
+  border: none;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+}
+
+.data-table td {
+  padding: 10px;
+  border: 1px solid #666;
+  text-align: center;
 }
 
 .data-table tr:nth-child(even) {
@@ -101,6 +108,8 @@ h1 {
   width: 20px;
   height: 20px;
   opacity: 0;
+  position: relative;
+  top: 2px;
   transition: opacity 0.2s;
 }
 
@@ -118,7 +127,6 @@ tr:hover .copy-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
 }
 
 .quantity-btn {
@@ -144,20 +152,6 @@ tr:hover .copy-btn {
 .quantity-btn:last-child {
   border-radius: 0 6px 6px 0;
   margin-left: 4px;
-}
-
-.quantity-control.active .quantity-btn:first-child,
-.quantity-control.active .quantity-btn:last-child {
-  margin: 0;
-  border-radius: 0;
-}
-
-.quantity-control.active .quantity-btn:first-child {
-  border-radius: 6px 0 0 6px;
-}
-
-.quantity-control.active .quantity-btn:last-child {
-  border-radius: 0 6px 6px 0;
 }
 
 .quantity-input {
@@ -215,5 +209,43 @@ tr:hover .copy-btn {
   width: 20px;
   height: 20px;
   object-fit: contain;
-  background: transparent !important;
+}
+
+/* Анимация вкладок */
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 150ms;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .table-container {
+    width: 95%;
+  }
+
+  .tab-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .quantity-input {
+    width: 40px;
+  }
+
+  .sum-container {
+    min-width: 60px;
+    font-size: 14px;
+  }
+
+  .payment-btn img {
+    width: 16px;
+    height: 16px;
+  }
 }
