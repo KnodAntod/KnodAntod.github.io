@@ -76,8 +76,8 @@ h1 {
   border-collapse: collapse;
   background-color: #2b2b3d;
   border-radius: 10px;
-  overflow: hidden;
   border: 1px solid #3a3a4d;
+  overflow: hidden;
 }
 
 .data-table th,
@@ -104,6 +104,10 @@ h1 {
   max-width: 180px;
 }
 
+.col-narrow {
+  width: 90px;
+}
+
 .copy-container {
   display: flex;
   align-items: center;
@@ -118,26 +122,20 @@ h1 {
 
 .copy-btn {
   background: none;
-  border: 1px solid #00c389;
-  border-radius: 4px;
+  border: none;
   cursor: pointer;
-  width: 24px;
-  height: 24px;
-  padding: 2px;
+  padding: 0;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: 0.2s;
 }
 
-.copy-btn:hover {
-  background-color: rgba(0, 195, 137, 0.1);
-}
-
 .copy-btn img {
-  width: 16px;
-  height: 16px;
-  filter: brightness(1) saturate(2) sepia(1) hue-rotate(-20deg);
+  width: 20px;
+  height: 20px;
+  filter: brightness(1) saturate(2) sepia(1) hue-rotate(100deg);
 }
 
 .quantity-control {
@@ -149,13 +147,12 @@ h1 {
 .quantity-btn {
   width: 30px;
   height: 30px;
-  background: #444;
+  background: #2b2b3d;
   border: 1px solid #777;
   color: #e0e0e0;
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .quantity-btn:first-child {
