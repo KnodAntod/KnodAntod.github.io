@@ -77,30 +77,31 @@ h1 {
   background-color: #2b2b3d;
   border-radius: 10px;
   overflow: hidden;
+  border: 1px solid #3a3a4d;
 }
 
-.data-table th, .data-table td {
+.data-table th,
+.data-table td {
   padding: 10px;
-  border: 1px solid #444;
+  border: 1px solid #3a3a4d;
   text-align: center;
   vertical-align: middle;
+  color: #e0e0e0;
 }
 
 .data-table th {
-  background-color: #00c389;
-  color: #1e1e2f;
-}
-
-.data-table tr:nth-child(even) {
   background-color: #2b2b3d;
-}
-
-.data-table tr:nth-child(odd) {
-  background-color: #2f2f42;
+  color: #e0e0e0;
 }
 
 .data-table tr:hover {
   background-color: #393952;
+}
+
+.col-name {
+  width: 160px;
+  min-width: 100px;
+  max-width: 180px;
 }
 
 .copy-container {
@@ -117,21 +118,25 @@ h1 {
 
 .copy-btn {
   background: none;
-  border: none;
+  border: 1px solid #00c389;
+  border-radius: 4px;
   cursor: pointer;
-  width: 18px;
-  height: 18px;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
 }
 
 .copy-btn:hover {
-  opacity: 1;
+  background-color: rgba(0, 195, 137, 0.1);
 }
 
 .copy-btn img {
-  width: 100%;
-  height: 100%;
+  width: 16px;
+  height: 16px;
   filter: brightness(1) saturate(2) sepia(1) hue-rotate(-20deg);
 }
 
@@ -146,12 +151,19 @@ h1 {
   height: 30px;
   background: #444;
   border: 1px solid #777;
-  color: orange;
-  cursor: pointer;
+  color: #e0e0e0;
   font-weight: bold;
   font-size: 16px;
-  border-radius: 5px;
+  cursor: pointer;
   transition: background-color 0.2s;
+}
+
+.quantity-btn:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.quantity-btn:last-child {
+  border-radius: 0 6px 6px 0;
 }
 
 .quantity-input {
@@ -159,9 +171,16 @@ h1 {
   padding: 5px;
   background-color: #444;
   border: 1px solid #777;
-  color: white;
+  color: #e0e0e0;
   text-align: center;
   margin: 0 4px;
+  -moz-appearance: textfield;
+}
+
+.quantity-input::-webkit-inner-spin-button,
+.quantity-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .sum-container {
@@ -170,8 +189,22 @@ h1 {
   border-radius: 5px;
   padding: 5px;
   min-width: 80px;
-  color: #3de58d;
   font-weight: bold;
+  color: #e0e0e0;
+}
+
+.sum-container span::after {
+  content: " ₽";
+  color: #e0e0e0;
+}
+
+.price-column {
+  color: #e0e0e0;
+}
+
+.price-column::after {
+  content: " ₽";
+  color: #3de58d;
 }
 
 .payment-btn {
@@ -201,7 +234,7 @@ h1 {
 
 .group-label {
   margin: 24px 0 8px;
-  color: #a0a0a0;
+  color: #e0e0e0;
   font-size: 16px;
   font-weight: bold;
   text-align: left;
