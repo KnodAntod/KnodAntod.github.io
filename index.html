@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Интерактив</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <meta name="description" content="Таблица для интерактива Sanchez69full">
+  <meta name="theme-color" content="#1e1e2f">
+</head>
+<body>
+  <h1 id="site-title">Sanchez69full Интерактив</h1>
+
+  <div class="tabs">
+    <button class="tab-button" data-tab="tab1">Все</button>
+    <button class="tab-button" data-tab="tab2">Люди</button>
+    <button class="tab-button" data-tab="tab3">Мутанты</button>
+    <button class="tab-button" data-tab="tab4">Хорошие события</button>
+    <button class="tab-button" data-tab="tab5">Нейтральные события</button>
+    <button class="tab-button" data-tab="tab6">Плохие события</button>
+    <button class="tab-button" data-tab="tab7">Таймер</button>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="col-name">Название</th>
+          <th class="col-narrow">Цена</th>
+          <th class="col-narrow" id="column-title">Количество</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
